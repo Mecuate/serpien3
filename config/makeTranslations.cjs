@@ -1,10 +1,9 @@
 const fs = require('fs')
-const path = require('path')
+const path = require('node:path')
 const cp = require('child_process')
-const env = process.env
 
 function _main_() {
-    const _path = `${env.PWD}/src/locales`
+    const _path = path.resolve('./', 'src/locales')
     const list = fs.readdirSync(_path)
     const allFolders = _readFolders(list.filter((item) => item !== 'translationKeys.ts'))
     const keys_string = _extract_names(allFolders)
@@ -15,8 +14,8 @@ function _main_() {
         2
     )}\n\nexport type iKeyTranslations = ${keys_string}\n\nexport type LangKeys = keyof typeof validTranslationKeys`
 
-    const filep = `${env.PWD}/src/locales/translationKeys.ts`
-    const confp = `${env.PWD}/.prettierrc.json`
+    const filep = path.resolve('./', 'src/locales/translationKeys.ts')
+    const confp = path.resolve('./', '.prettierrc.json')
     fs.writeFileSync(filep, result)
     cp.exec(`prettier --config ${confp} --write ${filep}`)
 
@@ -35,8 +34,9 @@ function _extract_names(allFolders) {
     })
     const _new_arr = [...new Set(resArr)]
     let txt = '\n '
-    
+
     for (const item of _new_arr) {
+        // txt += _names_iterator(allFolders[item])
         txt += `'${item}' | `
     }
 
@@ -60,7 +60,7 @@ function _readFolders(list) {
     const json = {}
 
     for (const item of list) {
-        const locale = `${env.PWD}/src/locales/${item}`
+        const locale = path.resolve('./', `src/locales/${item}`)
         const _list = fs.readdirSync(locale)
         const locale_v = _readList(item, _list)
         json[item] = locale_v
@@ -73,11 +73,15 @@ function _readList(folderName, list) {
 
     for (const item of list) {
         const file = JSON.parse(
-            fs.readFileSync(`${env.PWD}/src/locales/${folderName}/${item}`, 'utf8', (err, data) => {
-                if (err) {
-                    return {}
+            fs.readFileSync(
+                path.resolve('./', `src/locales/${folderName}/${item}`),
+                'utf8',
+                (err, data) => {
+                    if (err) {
+                        return {}
+                    }
                 }
-            })
+            )
         )
         _deeperLevel(json, file, item, true)
     }

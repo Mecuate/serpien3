@@ -1,1 +1,0 @@
-export { MecuateHome } from './MecuateHome'

@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-branch_name="$(git rev-parse --abbrev-ref HEAD)"
-n=$'\n'
-yarn format
-printf '\e[1;35m%s\e[0m%b' "$branch_name" " is updated. $n"

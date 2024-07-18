@@ -1,1 +1,0 @@
-export { SidebarData } from './MainMenuData'

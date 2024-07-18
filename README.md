@@ -1,12 +1,13 @@
-# toxtli
+# Serpien3: DocuWeb
 
-## WEB | frontend website app project, vite.react
--------
+---
 
-### FLOWS
+![Icon](/src/assets/logo.png 'Serpien3')
 
-flows in the app are to host containers for navigators, at no point are intended to be used for hosting screens or pages, check SCREEN section.
+Docuweb serpien3.
 
-### SCREEN
+```
+    git clone git@github.com:Mecuate/serpien3.git
+```
 
-screens folder is to host all the screens of the application, is where all screen/page componest should be.
+Mecuate Astrophytum 2024

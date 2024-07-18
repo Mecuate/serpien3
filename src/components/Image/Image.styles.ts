@@ -8,6 +8,20 @@ export const ImageRoot = styled('div', {
     width: '100%',
     height: '100%',
     objectFit: 'cover',
+
+    variants: {
+        variant: {
+            round: {
+                borderRadius: '$round',
+            },
+            soft: {
+                borderRadius: '$3',
+            },
+            sharp: {
+                borderRadius: '$1',
+            },
+        },
+    },
 })
 
 export const ImageSrc = styled('img', {

@@ -1,4 +1,5 @@
 import { ComponentProps } from 'react'
+import { colors } from 'styles/colors'
 import { IconRoot } from './Icon.styles'
 import { IconNames } from './IconNames'
 
@@ -9,22 +10,29 @@ export type IconProps = IconOwnProps & {
     label?: string
     color?: string
     css?: string
-    size?: string
+    viewBox?: string
 }
 
-export const Icon = ({ icon, label, color, css, size }: IconProps) => {
+export const Icon = ({
+    icon,
+    label,
+    color,
+    css,
+    size = 'small',
+    viewBox = '0 0 48 48',
+}: IconProps) => {
     return (
         <IconRoot
             css={{
-                fill: color ? `$${color}` : '$m_main',
+                fill: color ? color : colors.TEXT,
                 ...(css as any),
             }}
             role={label ? 'img' : 'presentation'}
-            size={size ? size : 'small'}
-            viewBox={'0 0 48 48'}
+            size={size}
+            viewBox={viewBox}
         >
             {label && <title>{label}</title>}
-            <use xlinkHref={`/src/assets/icons/icon-sprite.svg#${icon}`}></use>
+            <use xlinkHref={`/src/icon-sprite.svg#${icon}`}></use>
         </IconRoot>
     )
 }

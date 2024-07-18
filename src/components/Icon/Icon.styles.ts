@@ -26,6 +26,11 @@ export const IconRoot = styled('svg', {
                 width: '40px',
                 height: '40px',
             },
+            solo: {
+                position: 'absolute',
+                top: -2,
+                left: -1,
+            },
         },
     },
 })

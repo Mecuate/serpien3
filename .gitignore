@@ -7,6 +7,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# folders
+.notes/
 node_modules
 dist
 dist-ssr
@@ -14,9 +16,18 @@ dist-ssr
 note_folder
 log
 .env
-.env*
+
+
+# mock_data_folder
+src/assets/data
 
 # Editor directories and files
+yarn.lock
+package-lock.json
+.yarnrc.yml
+.yarn/*
+.yarn
+
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -26,3 +37,4 @@ log
 *.njsproj
 *.sln
 *.sw?
+setup.sh

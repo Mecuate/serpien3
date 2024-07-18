@@ -2,8 +2,6 @@ import { validTranslationKeys, LangKeys } from 'locales/translationKeys'
 
 enum Language {
     es = 'es',
-    en = 'en',
-    ko = 'ko',
 }
 
 export type magicObj = {
@@ -15,12 +13,10 @@ export const getActiveLanguage = () => {
     switch (userLang) {
         case Language.es:
             return Language.es
-        case Language.en:
-            return Language.en
-        case Language.ko:
-            return Language.ko
+        // case Language.en:
+        //     return Language.en
         default:
-            return Language.en
+            return Language.es
     }
 }
 
@@ -28,7 +24,7 @@ export const useTranslation = () => {
     const lang: LangKeys = getActiveLanguage()
     const selectedLanguage = validTranslationKeys[lang]
 
-    return (key: keyof typeof selectedLanguage, binds?: magicObj) => {
+    const t = (key: keyof typeof selectedLanguage, binds?: magicObj) => {
         let value = selectedLanguage[key] ? selectedLanguage[key] : key
 
         if (selectedLanguage[key] && binds) {
@@ -41,4 +37,6 @@ export const useTranslation = () => {
         }
         return value
     }
+
+    return { t }
 }

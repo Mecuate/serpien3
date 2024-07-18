@@ -18,9 +18,9 @@
         "noUnusedLocals": true,
         "noEmit": true,
         "jsx": "react-jsx",
-        "types": ["vitest/globals", "node"]
+        "types": ["node"]
     },
     "include": ["src"],
-    "exclude": ["node_modules"],
+    "exclude": ["node_modules", ".notes"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

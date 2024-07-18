@@ -1,1 +1,0 @@
-export { MenuPannel } from './MenuPannel'

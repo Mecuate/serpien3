@@ -1,52 +1,36 @@
-import { ParamsObject } from 'models/index'
+import { ParamsObject, ConverterType, CT } from 'models/index'
 
-const decode = (params: ParamsObject) => {
-    const convert = {
-        object: (k: string, v: any) => {
-            if (v.length) {
-                return `${k}=${v.toString()}`
-            }
-            let res = `${k}=[`
-            for (const [key, value] of Object.entries(v)) {
-                res += `${key}:${value}`
-            }
-            res += ']'
-            return res
-        },
-        function: (k: string, v: any) => `exec=${k}`,
-        string: (k: string, v: any) => `${k}=${v}`,
-        number: (k: string, v: any) => `${k}=${v}`,
-        boolean: (k: string, v: any) => `${k}=${v}`,
-        bigint: (k: string, v: any) => '',
-        symbol: (k: string, v: any) => '',
-        undefined: (k: string, v: any) => '',
-    }
+const Converter: ConverterType = {
+    [CT.OBJECT]: (k: string, v: any) => {
+        if (v.length) {
+            return `${k}=${v.toString()}`
+        }
+        let res = `${k}=[`
+        for (const [key, value] of Object.entries(v)) {
+            res += `${key}:${value}`
+        }
+        res += ']'
+        return res
+    },
+    [CT.STRING]: (k: string, v: any) => `${k}=${v}`,
+    [CT.NUMBER]: (k: string, v: any) => `${k}=${v}`,
+}
 
+export const decode = (params: ParamsObject) => {
+    if (!params) return ''
     let result = '?'
-    const KeyNames = ['object', 'function', 'string', 'number', 'boolean', 'bigint', 'symbol', 'undefined']
+    const KeyNames = [CT.OBJECT, CT.STRING, CT.NUMBER]
 
     for (const key in params) {
         if (Object.hasOwnProperty.call(params, key)) {
-            const prev = typeof params[key]
-            const item: keyof typeof convert = KeyNames.includes(prev) ? `${prev}` : 'undefined'
-
+            const keyType = KeyNames.find((item) => item === typeof params[key]) ?? CT.STRING
+            const item = KeyNames.includes(keyType) ? keyType : null
             if (!item) continue
-            const fun = convert[item]
-            result += fun(key, params[key])
-            result += '&'
+
+            result += `${Converter[item](key, params[key])}&`
         }
     }
-    result = result.substring(0, result.length - 1)
-
-    return result
+    return result.substring(0, result.length - 1)
 }
 
-const object2Query = (params: ParamsObject = null) => {
-    if (!params) {
-        return ''
-    }
-
-    return decode(params)
-}
-
-export { object2Query, decode }
+export const object2Query = (params: ParamsObject = null) => (!params ? '' : decode(params))
