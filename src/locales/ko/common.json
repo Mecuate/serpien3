@@ -1,0 +1,20 @@
+{
+    "menu": {
+        "home": "집",
+        "mecuate": "메큐에이트",
+        "account": "내 계정",
+        "academy": "학원",
+        "services": "서비스",
+        "docuweb": "도큐웹",
+        "projects": "프로젝트",
+        "publications": "게시",
+        "contact": "접촉",
+        "production": "생산"
+    },
+    "sections": {
+        "previousWorkShops": "이전의",
+        "nextWorkShops": "다음에 컴밍",
+        "currentWorkShops": "전류",
+        "blog": "학술 간행물 다른 미디어"
+    }
+}

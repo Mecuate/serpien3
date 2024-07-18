@@ -1,0 +1,20 @@
+{
+    "menu": {
+        "home": "inicio",
+        "mecuate": "Mecuate",
+        "account": "Mi Cuenta",
+        "academy": "Academia",
+        "services": "Servicios",
+        "docuweb": "DocuWeb",
+        "projects": "Proyectos",
+        "publications": "Publicaciones",
+        "contact": "Contacto",
+        "production": "Producción"
+    },
+    "sections": {
+        "previousWorkShops": "Previos",
+        "nextWorkShops": "Proximos",
+        "currentWorkShops": "Actuales",
+        "blog": "Otros medios"
+    }
+}

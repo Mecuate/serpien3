@@ -1,0 +1,22 @@
+export const COLORS = {
+    c_marron: '#c7522a',
+    c_beige: '#e5c185',
+    c_crema: '#fbf2c4',
+    c_verde: '#74a892',
+    c_turquesa: '#008585',
+    m_mate: '#f0ead2',
+    m_verdi: '#d5e198',
+    m_main: '#54a707',
+    m_cafe: '#9a7152',
+    m_tierra: '#5a3c2a',
+    text: '#232627',
+    text_li: '#c1cacd',
+
+    main_back: '#f3edea',
+    main_back_fade4: '#f3edea38',
+    main_accent: '#74a892',
+    main_accent_fade2: '#74a89220',
+    main_accent_fade4: '#74a89240',
+    main_accent_fade6: '#74a89260',
+    shadow_color: '#52606047',
+}
