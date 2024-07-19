@@ -1,37 +1,29 @@
+import { APP_PATH } from 'models'
 import { useState } from 'react'
 
-export enum PANNELS {
-    CONTENT = 'content',
-    SCHEMAS = 'schemas',
-    ENDPOINTS = 'endpoints',
-    UPLOADS = 'uploads',
-    NODES = 'nodes',
-    DASHBOARD = 'dashboard',
-    UNKNOWN = 'unknown',
-}
-
-const initialRecords: Record<PANNELS, boolean> = {
-    [PANNELS.CONTENT]: true,
-    [PANNELS.SCHEMAS]: true,
-    [PANNELS.ENDPOINTS]: false,
-    [PANNELS.UPLOADS]: true,
-    [PANNELS.NODES]: true,
-    [PANNELS.DASHBOARD]: true,
-    [PANNELS.UNKNOWN]: false,
+const initialRecords: Record<APP_PATH, boolean> = {
+    [APP_PATH.ROOT]: false,
+    [APP_PATH.MENU]: false,
+    [APP_PATH.HOME]: false,
+    [APP_PATH.LANDING]: true,
+    [APP_PATH.VIDEO]: false,
+    [APP_PATH.DECISION]: false,
+    [APP_PATH.INFORMATIVE]: false,
+    [APP_PATH.INTERACTIVE]: false,
 }
 
 export const useTogglePannel = () => {
     const [isPannelOpen, setPannelOpen] = useState(initialRecords)
 
-    const openPanel = (item: PANNELS) => {
+    const openPanel = (item: APP_PATH) => {
         setPannelOpen({ ...isPannelOpen, [item]: true })
     }
 
-    const closePanel = (item: PANNELS) => {
+    const closePanel = (item: APP_PATH) => {
         setPannelOpen({ ...isPannelOpen, [item]: false })
     }
 
-    const togglePanel = (item: PANNELS) => {
+    const togglePanel = (item: APP_PATH) => {
         setPannelOpen({ ...isPannelOpen, [item]: !isPannelOpen[item] })
     }
 

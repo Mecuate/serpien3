@@ -3,14 +3,13 @@ import { iKeyTranslations } from 'locales/translationKeys'
 
 export enum APP_PATH {
     ROOT = '/',
-    DASHBOARD = '/home',
-    CONTENT = '/content',
-    DB = '/database_schemas',
-    ENDPOINTS = '/endpoints',
-    UPLOAD = '/uploads',
-    NODE_TREE = '/node_tree',
-    LOGOUT = '/logout',
-    USER_PAGE = '/user-config',
+    MENU = '/menu',
+    HOME = '/home/*',
+    LANDING = '/landing',
+    VIDEO = '/video/*',
+    DECISION = '/decision/*',
+    INTERACTIVE = '/interactive/*',
+    INFORMATIVE = '/informative/*',
 }
 
 export type NavigationAppType = {

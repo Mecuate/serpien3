@@ -3,8 +3,7 @@ import { Typography } from 'components/Typography'
 import { Container } from './Dashboard.styles'
 import { useInstanceData } from 'hooks/useInstanceData'
 import { useTranslation } from 'hooks/useTranslations'
-import { PANNELS } from 'hooks/useTogglePannel/useTogglePannel'
-import { ScreenHeader } from 'components/ScreenHeader'
+import { APP_PATH } from 'models'
 
 export const Dashboard = () => {
     const { t } = useTranslation()
@@ -13,10 +12,9 @@ export const Dashboard = () => {
     const activeBullets = getLatestChanges()
 
     return (
-        <Screen pannel={PANNELS.DASHBOARD}>
+        <Screen pannel={APP_PATH.HOME}>
             <LeftSidePanel title={title}>{'notifications'}</LeftSidePanel>
-            <ScreenHeader title={'Dashboard(Wall) notifications'} actions={<></>}></ScreenHeader>
-            <ScreenContent pannel={PANNELS.DASHBOARD}>
+            <ScreenContent pannel={APP_PATH.HOME}>
                 <Container>
                     <Typography.Boom>{`Typography.Boom: ${title}`}</Typography.Boom>
                     <Typography.Title>{`Typography.Title: ${title}`}</Typography.Title>
@@ -30,7 +28,7 @@ export const Dashboard = () => {
                     <hr />
                 </Container>
             </ScreenContent>
-            <SidePannel pannel={PANNELS.SCHEMAS}>
+            <SidePannel pannel={APP_PATH.HOME}>
                 <Typography.Small>{new Date().toLocaleString(navigator.language)}</Typography.Small>
                 {activeBullets.map((txt, i) => {
                     return <Typography.Small key={`id_key_${i}`}>{txt}</Typography.Small>

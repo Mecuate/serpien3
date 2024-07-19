@@ -1,1 +1,0 @@
-export { DatabaseSchemas } from './DatabaseSchemas'

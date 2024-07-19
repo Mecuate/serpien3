@@ -1,13 +1,8 @@
-import { LayoutContainer, LeftPannel, MainRoot } from './Layout.styles'
-import { LeftBarControler, UpperBarControler } from 'components/Controllers'
-import { Content } from 'screens/Content'
+import { LayoutContainer } from './Layout.styles'
+
 import { APP_PATH } from 'models'
-import { DatabaseSchemas } from 'screens/DatabaseSchemas'
-import { LogOut } from 'screens/LogOut'
-import { NodeTrees } from 'screens/NodeTrees'
-import { Endpoints } from 'screens/Endpoints'
-import { Uploads } from 'screens/Uploads'
-import { Dashboard } from 'screens/Dashboard'
+// import { LogOut } from 'screens/LogOut'
+
 import {
     Route,
     createBrowserRouter,
@@ -15,18 +10,20 @@ import {
     Outlet,
     RouterProvider,
 } from 'react-router-dom'
+import { Dashboard } from 'pages/Dashboard'
 
 export const Layout = () => {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route path={APP_PATH.ROOT} element={<Root />}>
-                <Route path={APP_PATH.DASHBOARD} element={<Dashboard />} />
-                <Route path={APP_PATH.CONTENT} element={<Content />} />
-                <Route path={APP_PATH.DB} element={<DatabaseSchemas />} />
-                <Route path={APP_PATH.ENDPOINTS} element={<Endpoints />} />
-                <Route path={APP_PATH.UPLOAD} element={<Uploads />} />
-                <Route path={APP_PATH.NODE_TREE} element={<NodeTrees />} />
-                <Route path={APP_PATH.LOGOUT} element={<LogOut />} />
+                <Route path={APP_PATH.ROOT} element={<Dashboard />} />
+                <Route path={APP_PATH.HOME} element={'<Home />'} />
+                <Route path={APP_PATH.LANDING} element={'<Landing />'} />
+                <Route path={APP_PATH.MENU} element={'<Menu />'} />
+                <Route path={APP_PATH.INFORMATIVE} element={'<Informative />'} />
+                <Route path={APP_PATH.INTERACTIVE} element={'<Interactive />'} />
+                <Route path={APP_PATH.VIDEO} element={'<Video />'} />
+                <Route path={APP_PATH.DECISION} element={'<Decision />'} />
             </Route>
         )
     )
@@ -37,13 +34,8 @@ export const Layout = () => {
 const Root = () => {
     return (
         <LayoutContainer>
-            <LeftPannel>
-                <LeftBarControler />
-            </LeftPannel>
-            <MainRoot>
-                <UpperBarControler />
-                <Outlet />
-            </MainRoot>
+            {/* <UpperBarControler /> */}
+            <Outlet />
         </LayoutContainer>
     )
 }

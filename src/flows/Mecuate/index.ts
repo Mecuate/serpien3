@@ -1,1 +1,0 @@
-export { MecuateNavigator } from './MecuateNavigator'
