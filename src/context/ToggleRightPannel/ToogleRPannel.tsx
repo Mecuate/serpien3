@@ -1,11 +1,11 @@
 import { PropsWithChildren, createContext, FunctionComponent, useContext } from 'react'
-import { PANNELS } from 'hooks/useTogglePannel/useTogglePannel'
+import { APP_PATH } from 'models'
 
 export type ToggleContextType = {
-    isPannelOpen: Record<PANNELS, boolean>
-    openPanel: (item: PANNELS) => void
-    closePanel: (item: PANNELS) => void
-    togglePanel: (item: PANNELS) => void
+    isPannelOpen: Record<APP_PATH, boolean>
+    openPanel: (item: APP_PATH) => void
+    closePanel: (item: APP_PATH) => void
+    togglePanel: (item: APP_PATH) => void
 }
 
 export const TogglePannelContext = createContext<ToggleContextType | undefined>(undefined)
