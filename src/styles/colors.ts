@@ -1,8 +1,9 @@
 export const colors = {
+    BACKGROUND: '#020909',
     PRIMARY: '#1B6BB2',
     SECONDARY: '#13896D',
     TERTIARY: '#8A45DB',
-    TEXT: '#39403E',
+    TEXT: '#999f9d',
     WHITE: '#FFFFFF',
     LIGHT: '#EBEAEF',
     TRANSPARENT: 'transparent',

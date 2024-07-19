@@ -6,7 +6,11 @@ export const ScreenContainer = styled('div', {
     overflow: 'auto',
     width: '100%',
     height: '100%',
-    paddingLeft: '$3',
+    padding: 0,
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
 })
 
 export const ScrollableContainer = styled('div', {
@@ -19,18 +23,4 @@ export const ScrollableContainer = styled('div', {
     gridTemplateColumns: `275px 1fr 1fr 378px`,
     gap: '0px',
     transition: 'all 0.3s ease-in-out',
-
-    variants: {
-        variant: {
-            bigger: {
-                gridTemplateColumns: `275px 1fr 1fr 674px`,
-            },
-            open: {
-                gridTemplateColumns: `275px 1fr 1fr 378px`,
-            },
-            closed: {
-                gridTemplateColumns: `275px 1fr 1fr 40px`,
-            },
-        },
-    },
 })
