@@ -3,7 +3,9 @@ import path from 'path'
 import { readdirSync } from 'fs'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
+import svgr from 'vite-plugin-svgr'
 import * as dotenv from 'dotenv'
+
 dotenv.config()
 
 const absolutePathAliases: { [key: string]: string } = {}
@@ -22,7 +24,7 @@ const _ = {
 
 export default defineConfig({
     mode: 'test',
-    plugins: [react()],
+    plugins: [react(), svgr()],
     resolve: {
         alias: {
             ...absolutePathAliases,

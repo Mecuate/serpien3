@@ -109,13 +109,13 @@ export const { styled, css, theme, config, getCssText, globalCss, keyframes } = 
         },
         baseInputBox: (value: Stitches.PropertyValue<'borderRadius'>) => {
             return {
-                'outline': 'none',
-                'border': 'none',
-                'borderRadius': value,
-                'fontWeight': 'bold',
-                'fontFamily': 'monospace',
-                'fontSize': '14pt',
-                'color': colors.TEXT,
+                outline: 'none',
+                border: 'none',
+                borderRadius: value,
+                fontWeight: 'bold',
+                fontFamily: 'monospace',
+                fontSize: '14pt',
+                color: colors.TEXT,
                 '&:focus': {
                     color: colors.PRIMARY,
                 },
@@ -157,9 +157,9 @@ export const globalStyles = globalCss({
     ],
 
     '*': {
-        'boxSizing': 'border-box',
-        'fontSynthesis': 'none',
-        'textRendering': 'optimizeLegibility',
+        boxSizing: 'border-box',
+        fontSynthesis: 'none',
+        textRendering: 'optimizeLegibility',
         '-webkit-font-smoothing': 'antialiased',
         '-moz-osx-font-smoothing': 'grayscale',
         '-webkit-text-size-adjust': '100%',
@@ -183,19 +183,22 @@ export const globalStyles = globalCss({
         width: '5px',
         height: '5px',
     },
-    'body': {
+    body: {
         margin: 0,
         padding: 0,
         letterSpacing: '0px',
         background: colors.SURFACE[200],
         fontFamily: '$sans',
     },
-    'a': {
+    a: {
         textDecoration: 'none',
         color: 'inherit',
     },
-    'p': {
+    p: {
         color: colors.TEXT,
+    },
+    '.hide': {
+        display: 'none',
     },
 })
 

@@ -1,0 +1,1 @@
+export { default as PlayerUISVG } from './video-player-controls.svg?react'

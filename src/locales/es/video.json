@@ -1,0 +1,6 @@
+{
+    "titles": {
+        "videoName": "Video: {{name}}",
+        "length": "length {{length}}"
+    }
+}

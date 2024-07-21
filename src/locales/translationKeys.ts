@@ -10,6 +10,8 @@ export const validTranslationKeys = {
         'common:menu.uploads': 'Uploads',
         'common:menu.logout': 'Cerrar sesión',
         'endpoints:save': 'Guardar',
+        'video:titles.videoName': 'Video: {{name}}',
+        'video:titles.length': 'length {{length}}',
     },
 }
 
@@ -22,5 +24,7 @@ export type iKeyTranslations =
     | 'common:menu.uploads'
     | 'common:menu.logout'
     | 'endpoints:save'
+    | 'video:titles.videoName'
+    | 'video:titles.length'
 
 export type LangKeys = keyof typeof validTranslationKeys

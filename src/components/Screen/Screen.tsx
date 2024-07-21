@@ -10,11 +10,11 @@ type ScreenProps = PropsWithChildren & {
 
 export const Screen = ({ children, pannel, isScrollable, id }: ScreenProps) => {
     return isScrollable ? (
-        <ScreenContainer id={id} data-screenName={pannel}>
+        <ScreenContainer id={id} data-screenname={pannel}>
             <ScrollableContainer>{children}</ScrollableContainer>
         </ScreenContainer>
     ) : (
-        <ScreenContainer id={id} data-screenName={pannel}>
+        <ScreenContainer id={id} data-screenname={pannel}>
             {children}
         </ScreenContainer>
     )
