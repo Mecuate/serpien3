@@ -7,6 +7,7 @@ import { APINetworkProvider } from 'context/NetworkContext'
 import { QueryClientProvider, QueryClient } from 'react-query'
 import { useRef } from 'react'
 import { networkHandlers } from 'context/NetworkContext/network.implementation'
+import { AudioFXContextProvider } from 'context/AudioFXContext/AudioFXController'
 
 function App() {
     const queryClient = useRef<QueryClient>()
@@ -23,7 +24,9 @@ function App() {
             <APINetworkProvider handlers={networkHandlers}>
                 <SectionCoordinatorProvider>
                     <LocalStorageContextProvider storageSystem={storageSystem}>
-                        <Layout />
+                        <AudioFXContextProvider>
+                            <Layout />
+                        </AudioFXContextProvider>
                     </LocalStorageContextProvider>
                 </SectionCoordinatorProvider>
             </APINetworkProvider>

@@ -183,6 +183,23 @@ export const globalStyles = globalCss({
         width: '5px',
         height: '5px',
     },
+    '::-webkit-full-screen, :not(:root):fullscreen, :fullscreen': {
+        background: colors.BACKGROUND,
+        zIndex: 2147483647,
+    },
+    'video::-webkit-media-controls-enclosure': {
+        display: 'none !important',
+    },
+    '.vidBar:-moz-full-screen': { position: 'fixed' },
+    '.vidBar:-webkit-full-screen': { position: 'fixed' },
+    '.vidBar:-ms-fullscreen': { position: 'fixed' },
+    '.vidBar:fullscreen': { position: 'fixed' },
+    '.vidBar': { zIndex: 2147483648 },
+    /* 
+Special Shadow DOM Settings to Override Default Controls: 
+https://css-tricks.com/custom-controls-in-html5-video-full-screen/ 
+*/
+
     body: {
         margin: 0,
         padding: 0,
@@ -199,6 +216,9 @@ export const globalStyles = globalCss({
     },
     '.hide': {
         display: 'none',
+    },
+    '.flex': {
+        display: 'flex',
     },
 })
 

@@ -2,6 +2,7 @@ import { JSONSContent } from 'models'
 
 export enum LocalSItem {
     DISPLAY_MODES = 'display.modes',
+    SFX_status = 'sfx.status',
 }
 
 export const useLocalStorage = () => {

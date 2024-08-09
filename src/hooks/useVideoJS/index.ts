@@ -1,0 +1,1 @@
+export { useVideoJS } from './useVideoJS'

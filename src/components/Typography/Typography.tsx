@@ -82,6 +82,13 @@ const TextRegular = ({ children, ...others }: TextProps) => {
         </Typography>
     )
 }
+const TextPreformatted = ({ children, ...others }: TextProps) => {
+    return (
+        <Typography {...others} weight={'regular'} size={'normal'}>
+            <pre>{children}</pre>
+        </Typography>
+    )
+}
 const TextShort = ({ children, ...others }: TextProps) => {
     return (
         <Typography {...others} weight={'semi'} size={'short'}>
@@ -95,6 +102,7 @@ Typography.Header = TextHeader
 Typography.Big = TextBig
 Typography.Title = TextTitle
 Typography.Subtitle = TextSubtitle
+Typography.Pre = TextPreformatted
 Typography.Heavy = TextHeavy
 Typography.Regular = TextRegular
 Typography.Short = TextShort

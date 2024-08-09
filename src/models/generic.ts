@@ -8,6 +8,8 @@ export type TypedObject<T> = {
 
 export type JSONSContent = {
     [key: string]:
+        | null
+        | undefined
         | string
         | number
         | boolean

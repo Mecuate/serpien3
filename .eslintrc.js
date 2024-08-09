@@ -14,15 +14,20 @@ module.exports = exports = {
         sourceType: 'module',
     },
 
-    plugins: ['@typescript-eslint', 'react'],
+    plugins: ['@typescript-eslint', 'react', 'react-hooks'],
 
-    extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react/recomended'],
+    extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:react/recomended',
+    ],
     // overrides: [
     //     {
     //         files: ['tsconfig.json'],
     //     },
     // ],
     rules: {
+        'react-hooks/exhaustive-deps': 'warn',
         // Possible Errors (overrides from recommended set)
         // 'no-extra-parens': ERROR,
         // 'no-unexpected-multiline': ERROR,

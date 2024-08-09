@@ -1,0 +1,11 @@
+.slider::-moz-range-track,
+.slider::-webkit-slider-runnable-track {
+    width: var(--track-height);
+    height: var(--track-width);
+    background-color: cyan;
+    border: 1px solid pink;
+    outline: none;
+    border-radius: var(--track-radius);
+    cursor: pointer;
+    background: linear-gradient(to right, red 0%, orange 50%, brown 100%, white 100%);
+}
