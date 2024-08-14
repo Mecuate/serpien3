@@ -12,7 +12,7 @@ const mockData = {
         decisions: [
             {
                 id: 'desicion_001',
-                start: 16624,
+                start: 116624,
                 end: 18000,
                 slow: true,
                 duration: 12,
@@ -26,7 +26,7 @@ const mockData = {
             },
             {
                 id: 'desicion_003',
-                start: 52624,
+                start: 852624,
                 end: 53000,
                 slow: true,
                 duration: 42,

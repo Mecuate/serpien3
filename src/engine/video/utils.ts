@@ -5,8 +5,6 @@ export const defineDesicions = (decisions: any[]) => {
 
 export const fnEv = (item: number, time: number) => {
     const apx = Math.round(time - item)
-    console.log('@@@c apx', apx)
-
     return apx > -50 && apx < 50
 }
 
@@ -30,7 +28,7 @@ export const getVal = (val: number) => {
     let b = a / 100
     let c = b.toFixed(2)
     let d = parseFloat(c)
-    return { limited: d < 0.1 ? 0.1 : d > 1 ? 1 : d, raw: d, round: parseFloat(b.toFixed(1)) }
+    return { limited: d < 0.1 ? 0.1 : d > 1 ? 1 : d, raw: b, round: parseFloat(b.toFixed(1)) }
 }
 
 export const smoothRef = (value: number, step: number, step2?: number, value2?: number) => ({

@@ -76,6 +76,7 @@ export const VideoCanvas = ({
             </Video>
 
             {!showMeta ? (
+                <>
                 <pre
                     style={{
                         position: 'absolute',
@@ -85,9 +86,32 @@ export const VideoCanvas = ({
                         color: '#ffffff90',
                         zIndex: 1000,
                     }}
-                >
+                    >
                     {JSON.stringify(plyDesc, null, 2)}
                 </pre>
+                <span style={{
+                        width: '250px' ,
+                        height: '250px' ,
+                        position: 'absolute' ,
+                        zIndex: '1000' ,
+                        top: '139px' ,
+                        border: '15px solid greenyellow' ,
+                        display: 'flex' ,
+                        flexDirection: 'column' ,
+                }}>
+
+                <button onClick={() => {plyDesc.speedTo(1)}}>speed 1</button>
+                <button onClick={() => {plyDesc.speedTo(0.9)}}>speed 0.9</button>
+                <button onClick={() => {plyDesc.speedTo(0.8)}}>speed 0.8</button>
+                <button onClick={() => {plyDesc.speedTo(0.7)}}>speed 0.7</button>
+                <button onClick={() => {plyDesc.speedTo(0.6)}}>speed 0.6</button>
+                <button onClick={() => {plyDesc.speedTo(0.5)}}>speed 0.5</button>
+                <button onClick={() => {plyDesc.speedTo(0.4)}}>speed 0.4</button>
+                <button onClick={() => {plyDesc.speedTo(0.3)}}>speed 0.3</button>
+                <button onClick={() => {plyDesc.speedTo(0.2)}}>speed 0.2</button>
+                <button onClick={() => {plyDesc.speedTo(0.1)}}>speed 0.1</button>
+                </span>
+                    </>
             ) : null}
         </StandByVideoContainer>
     )
