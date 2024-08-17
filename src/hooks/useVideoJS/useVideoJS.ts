@@ -1,9 +1,7 @@
 import { GenericObject } from 'models'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { videojs } from './globalScript'
 
-// @ts-ignore
-const videojs = window.videojs
-let only1l00p = false
 export const useVideoJS = (
     videoRef: React.RefObject<HTMLVideoElement | null>,
     options: GenericObject
@@ -17,18 +15,9 @@ export const useVideoJS = (
     const [isPlaying, setIsPlaying] = useState(false)
 
     const tooglePlay = useCallback(() => {
-        if (only1l00p) {
-            console.log('only1l00p', Date.now())
-            return
-        }
-
         if (isPlaying) {
-            only1l00p = true
             player.pause()
             setIsPlaying(false)
-            setTimeout(() => {
-                only1l00p = false
-            }, 90)
             return
         }
         setIsPlaying(true)
@@ -36,10 +25,6 @@ export const useVideoJS = (
     }, [player, isPlaying])
 
     useEffect(() => {
-        // if (videoRef.current) {
-        //     videojs(videoRef.current, options)
-        // }
-
         return () => {
             if (videoRef.current) {
                 videoRef.current.removeEventListener('ended', () => {}, true)

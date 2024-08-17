@@ -88,9 +88,9 @@ export const sideBoxD = css({
 
 export const MaskTitle = styled('div', {
     bc: colors.TRANSPARENT,
-    borderRadius: '16px',
-    minWidth: '50%',
-    minHeight: '25vh',
+    // borderRadius: '16px',
+    width: '100%',
+    height: '100%',
     padding: '1rem',
     position: 'absolute',
     display: 'flex',
@@ -100,7 +100,7 @@ export const MaskTitle = styled('div', {
     left: 0,
     zIndex: 2,
     backdropFilter: 'blur(20px)',
-    boxShadow: '6px 16px 20px 6px #5cb5a5e6, 11px -4px 13px #c0ff00bf',
+    // boxShadow: '6px 16px 20px 6px #5cb5a5e6, 11px -4px 13px #c0ff00bf',
 })
 
 export const VolumeTrackBack = styled('div', {

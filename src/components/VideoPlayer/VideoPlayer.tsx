@@ -13,7 +13,7 @@ import { useTranslation } from 'hooks/useTranslations'
 import { useEffect, useRef, useState } from 'react'
 import { usePlayerDecisions } from 'hooks/usePlayerDecisions'
 import { VideoCanvas } from './VideoCanvas'
-
+import { DecisionCanvas } from 'components/DecisionCanvas/DecisionCanvas'
 
 type VideoPlayerProps = {
     src: string
@@ -45,34 +45,12 @@ export const VideoPlayer = ({
     //     audioBackgroundRef,
     // })
 
-
-
     return (
         <VideoContainer data-vjs-player>
-            
-            {/* <MaskTitle>
-                <div>pausedTime</div>
-                <Typography.Pre>
-                    {JSON.stringify(
-                        { stopForDecision, pausedTime, playRate, timeLineVal },
-                        null,
-                        2
-                    )}
-                </Typography.Pre>
+            <MaskTitle>
+                <DecisionCanvas variant="h1" />
             </MaskTitle>
 
-            {stopForDecision && false && (
-                <MaskTitle>
-                    <div>Video samples</div>
-                    <Typography.Subtitle>
-                        {t('video:titles.videoName', { name: 'sample_1' })}
-                    </Typography.Subtitle>
-
-                    <Typography.Regular>
-                        {t('video:titles.length', { length: 15664555 })}
-                    </Typography.Regular>
-                </MaskTitle>
-            )} */}
             <VideoCanvas
                 src={src}
                 ident={ident}

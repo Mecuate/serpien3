@@ -1,4 +1,6 @@
-export const defineDesicions = (decisions: any[]) => {
+import { DecisionType } from "models/video"
+
+export const defineDesicions = (decisions: DecisionType[]) => {
     const stopSteps: number[] = decisions.map((decision) => decision.start)
     return { decisions, stopSteps }
 }

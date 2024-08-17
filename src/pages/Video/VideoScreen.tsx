@@ -6,28 +6,28 @@ import { useTranslation } from 'hooks/useTranslations'
 import { APP_PATH } from 'models'
 const mockData = {
     root: {
-        src: '/sample_1.mp4',
+        src: '/nude.mp4',
         poster: '/vid_1.jpg',
         id: 'eeeee',
         decisions: [
             {
                 id: 'desicion_001',
-                start: 116624,
-                end: 18000,
+                start: 32000,
+                end: 38000,
                 slow: true,
-                duration: 12,
+                duration: 42,
             },
             {
                 id: 'desicion_002',
-                start: 6624,
-                end: 8000,
+                start: 4650,
+                end: 10000,
                 slow: true,
-                duration: 12,
+                duration: 44,
             },
             {
                 id: 'desicion_003',
-                start: 852624,
-                end: 53000,
+                start: 90000,
+                end: 98000,
                 slow: true,
                 duration: 42,
             },
@@ -60,11 +60,9 @@ export const VideoScreen = () => {
                     padding: 0,
                     height: '100%',
                     width: '100%',
-                    color: 'blueviolet',
+                    color: 'white',
                 }}
             >
-                
-
                 <VideoPlayer
                     src={mockData.root.src}
                     poster={mockData.root.poster}

@@ -1,6 +1,7 @@
 import { useAudioFXContext } from 'context/AudioFXContext/AudioFXController'
 import { defineDesicions, getVal, isTimeForDesicion, smoothRef } from 'engine/video/utils'
 import { GenericObject } from 'models'
+import { DecisionType } from 'models/video'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 type UseDecisionsProps = {
@@ -20,12 +21,15 @@ export const usePlayerDecisions = ({
 }: UseDecisionsProps) => {
     const { audioBackgroundRef } = useAudioFXContext()
     const activeDecisions = useMemo(() => defineDesicions(decisions), [decisions])
-    const ovmty45 = useRef(true)
+    const shunt = useRef(true)
 
     const [timeLineVal, setTimeLineVal] = useState(videoRef.current?.currentTime ?? 0)
     const [playerVolume] = useState(videoRef.current?.volume ?? 1)
     const [stopForDecision, setStopForDecision] = useState(false)
+    const [currentDecision, setCurrentDecision] = useState({} as DecisionType)
+
     const [pausedTime, setPausedTime] = useState(0)
+    const [intData, setIntData] = useState<GenericObject>({})
     const [playRate, setPlayRate] = useState(1)
     const [currentID, setCurrentID] = useState('')
 
@@ -60,38 +64,31 @@ export const usePlayerDecisions = ({
 
     const backSoundIn = useCallback(
         (cap: number = 0.6) => {
-            console.log('backSoundIn')
-
-            // audioBackgroundRef.current!.muted = false
-            // audioBackgroundRef.current!.play()
-            // animatedFunction(
-            //     (p: any) => {
-            //         p.increment()
-            //         audioBackgroundRef.current!.volume = p.value > cap ? cap : p.value
-            //     },
-            //     { params: smoothRef(0, 0.01), max: 100 }
-            // )
+            audioBackgroundRef.current!.muted = false
+            audioBackgroundRef.current!.play()
+            animatedFunction(
+                (p: any) => {
+                    p.increment()
+                    audioBackgroundRef.current!.volume = p.value > cap ? cap : p.value
+                },
+                { params: smoothRef(0, 0.01), max: 100 }
+            )
         },
         [smoothRef, audioBackgroundRef.current]
     )
 
     const backSoundOut = useCallback(
         (cap: number = 0.6) => {
-            // animatedFunction(
-            //     (p: any) => {
-            //         p.increment()
-            //         audioBackgroundRef.current!.volume = p.value <= 0 ? 0 : p.value
-            //     },
-            //     { params: smoothRef(cap, -0.01), max: 100 }
-            // ).then(() => {
-            //     audioBackgroundRef.current!.muted = true
-            //     audioBackgroundRef.current!.pause()
-            // })
-
-            console.log('backSoundOut')
-
-            // audioBackgroundRef.current!.muted = true
-            // audioBackgroundRef.current!.pause()
+            animatedFunction(
+                (p: any) => {
+                    p.increment()
+                    audioBackgroundRef.current!.volume = p.value <= 0 ? 0 : p.value
+                },
+                { params: smoothRef(cap, -0.01), max: 100 }
+            ).then(() => {
+                audioBackgroundRef.current!.muted = true
+                audioBackgroundRef.current!.pause()
+            })
         },
         [smoothRef, audioBackgroundRef.current]
     )
@@ -124,25 +121,19 @@ export const usePlayerDecisions = ({
         [player, playerVolume, playRate]
     )
 
-    const speedUp = useCallback(
+    const restorePlayerVolume = useCallback(
         (n: number) => {
             const expectedMax = Math.floor((n * 1000) / 16.66)
             animatedFunction(
                 (p: any) => {
                     p.increment()
-                    const { limited, raw, round } = getVal(p.value)
-
-                    if (limited != playRate) {
-                        setPlayRate(round)
-                    }
+                    const { raw } = getVal(p.value)
                     player.volume(raw < 0.05 ? 0.05 : raw > playerVolume ? playerVolume : raw)
                     return raw > 1.1
                 },
-                { params: smoothRef(0.1, 0.019), max: expectedMax }
+                { params: smoothRef(0.1, 0.02), max: expectedMax }
             ).then(() => {
-                videoRef.current!.controls = true
-                setCurrentID('')
-                setPausedTime(0)
+                setPlayRate(1)
             })
         },
         [player, playerVolume, playRate]
@@ -154,12 +145,7 @@ export const usePlayerDecisions = ({
 
     const setForDecision = useCallback(
         (b: boolean, id: string) => {
-            console.log('setForDecision', b, id, currentID)
-
-            setPausedTime(0)
-
             if (b) {
-                console.log('registering id:', id)
                 monitorPause.current = setInterval(evalDecisionTime, 1000)
                 setCurrentID(id)
             } else {
@@ -167,6 +153,8 @@ export const usePlayerDecisions = ({
                 monitorPause.current = undefined
                 setCurrentID('')
             }
+
+            setPausedTime(0)
             setStopForDecision(b)
         },
         [currentID, monitorPause, setStopForDecision, setCurrentID, setPausedTime]
@@ -176,50 +164,47 @@ export const usePlayerDecisions = ({
     Loop evaluations from video time line
     */
     const decisionEffect = useCallback(
-        async (duration: number = 12) => {
-            console.log('decisionEffect satrted with:', duration)
+        async ({ duration }: DecisionType) => {
             backSoundIn()
-            slowDown(Math.floor(duration / 3))
+            slowDown(2)
             return new Promise<NodeJS.Timeout>((resolve) => {
                 const wait = setTimeout(() => {
                     resolve(wait)
-                }, (duration - 1) * 1000)
+                }, duration * 1000 - 100)
             }).then((wait) => {
-                console.log('waited value is:', wait)
-
+                shunt.current = true
                 clearTimeout(wait)
-
                 backSoundOut()
-                setForDecision(false, currentID)
-                speedUp(1)
+                setForDecision(false, '')
+                restorePlayerVolume(1)
             })
         },
-        [currentID, setForDecision, backSoundIn, backSoundOut, slowDown, speedUp]
+        [setForDecision, backSoundIn, backSoundOut, slowDown, restorePlayerVolume]
     )
+
     useEffect(() => {
-        if (stopForDecision || !ovmty45.current) return
+        if (stopForDecision || !shunt.current) {
+            return
+        }
 
         const { assigned, triggerDecision } = isTimeForDesicion(
             activeDecisions.stopSteps,
             timeLineVal
         )
+        setIntData({ assigned, triggerDecision })
 
-        if (triggerDecision && ovmty45.current) {
-            ovmty45.current = false
-            const des = activeDecisions.decisions[assigned]
-            setForDecision(true, des.id)
+        if (triggerDecision && shunt.current) {
+            shunt.current = false
+            const currDesc = activeDecisions.decisions[assigned]
+            setCurrentDecision(currDesc)
+            setForDecision(true, currDesc.id)
 
-            if (des && des.slow) {
-                decisionEffect(des.duration)
-
-                // setTimeout(() => {
-                //     // speedUp(maxTime)
-                //     backSoundOut()
-                //     setForDecision(false, des.id)
-                // }, des.duration * 1000)
+            if (currDesc && currDesc.slow) {
+                decisionEffect(currDesc)
             }
         }
     }, [
+        player,
         timeLineVal,
         stopForDecision,
         activeDecisions,
@@ -227,23 +212,8 @@ export const usePlayerDecisions = ({
         backSoundIn,
         backSoundOut,
         slowDown,
-        speedUp,
+        restorePlayerVolume,
     ])
-
-    /*   useEffect(() => {
-        if (currentID) {
-            monitorPause.current = setInterval(evalDecisionTime, 1000)
-            setPausedTime(0)
-        }
-
-        if (!currentID) {
-            clearInterval(monitorPause.current)
-        }
-
-        return () => {
-            clearInterval(monitorPause.current)
-        }
-    }, [currentID, monitorPause, evalDecisionTime]) */
 
     useEffect(() => {
         if (!player) {
@@ -283,5 +253,5 @@ export const usePlayerDecisions = ({
         }
     }, [videoHasEnded, isPlaying])
 
-    return { stopForDecision, pausedTime, timeLineVal, playRate, speedTo }
+    return { stopForDecision, pausedTime, timeLineVal, playRate, speedTo, intData, currentID }
 }
