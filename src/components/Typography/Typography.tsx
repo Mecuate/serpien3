@@ -1,7 +1,9 @@
 import { ComponentProps } from 'react'
-import { TextContainer } from './Typography.styles'
+import { HTLMContainer, TextContainer } from './Typography.styles'
 
-export type TextProps = ComponentProps<typeof TextContainer>
+export type TextProps = ComponentProps<typeof TextContainer> & {
+    htmlData?: string
+}
 export type TextColors = 'light' | 'primary' | 'default' | 'faint' | 'success' | 'danger' | 'warn'
 
 export const Typography = ({
@@ -75,6 +77,13 @@ const TextSubtitle = ({ children, ...others }: TextProps) => {
         </Typography>
     )
 }
+const TextHTML = ({ htmlData, ...others }: TextProps) => {
+    return htmlData ? (
+        <HTLMContainer {...others} weight={'regular'} size={'normal'} dangerouslySetInnerHTML={{ __html: htmlData }}></HTLMContainer>
+    ) : (
+        <span></span>
+    )
+}
 const TextRegular = ({ children, ...others }: TextProps) => {
     return (
         <Typography {...others} weight={'regular'} size={'normal'}>
@@ -107,5 +116,6 @@ Typography.Heavy = TextHeavy
 Typography.Regular = TextRegular
 Typography.Short = TextShort
 Typography.Small = TextSmall
+Typography.HTML = TextHTML
 
 Typography.displayName = 'Text'

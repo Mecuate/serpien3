@@ -3,9 +3,10 @@ export const colors = {
     PRIMARY: '#1B6BB2',
     SECONDARY: '#13896D',
     TERTIARY: '#8A45DB',
-    TEXT: '#999f9d',
+    TEXT: '#CDD9D5',
     WHITE: '#FFFFFF',
     LIGHT: '#EBEAEF',
+    SKY: '#317CED',
     TRANSPARENT: 'transparent',
 
     PALETTE: {

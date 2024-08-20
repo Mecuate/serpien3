@@ -1,9 +1,10 @@
 import { createRef, useCallback, useEffect, useMemo, useState } from 'react'
-import { StandByVideoContainer, Video } from './VideoPlayer.styles'
+import { MaskTitle, StandByVideoContainer, Video } from './VideoPlayer.styles'
 import { usePlayerDecisions } from 'hooks/usePlayerDecisions'
 import { DecisionType } from 'models/video'
 import { useAudioFXContext } from 'context/AudioFXContext/AudioFXController'
 import { useVideoJS } from 'hooks/useVideoJS'
+import { DecisionCanvas, DESCOLOR } from 'components/DecisionCanvas/DecisionCanvas'
 
 type VideoCanvasProps = {
     decisions: DecisionType[]
@@ -11,8 +12,9 @@ type VideoCanvasProps = {
     ident: string
     src: string
     poster: string
-    muted: boolean
-    keepAsPlayback: boolean
+    muted?: boolean
+    autoplay?: boolean
+    keepAsPlayback?: boolean
 }
 const playerOptions = {
     controls: true,
@@ -74,6 +76,15 @@ export const VideoCanvas = ({
             >
                 <source src={src} type="video/mp4" />
             </Video>
+            
+                <MaskTitle>
+                    <DecisionCanvas variant={DESCOLOR.FOREST} />
+                </MaskTitle>
+            {plyDesc.stopForDecision && (
+                <MaskTitle>
+                    <DecisionCanvas variant={DESCOLOR.FOREST} />
+                </MaskTitle>
+            )}
 
             {showMeta && (
                 <pre

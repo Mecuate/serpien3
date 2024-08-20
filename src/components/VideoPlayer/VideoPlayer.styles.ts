@@ -59,7 +59,6 @@ export const StandByVideoContainer = styled('div', {
     display: 'block',
     width: '100%',
     height: '100%',
-    background: `linear-gradient(to bottom, ${colors.LIGHT}50 0%, ${colors.DANGER[300]} 95%)`,
     transition: 'all 0.5s ease-in-out',
 })
 
@@ -68,27 +67,22 @@ export const sideBoxA = css({
     left: 0,
     right: 0,
     bottom: 0,
-    border: '1px solid red',
 })
 export const sideBoxB = css({
     top: 'calc(100% - 25px)',
     left: 'calc(100% - 25px)',
-    border: '1px solid white',
 })
 export const sideBoxC = css({
     bottom: 'calc(100% - 25px)',
     left: 'calc(100% - 25px)',
-    border: '1px solid cyan',
 })
 export const sideBoxD = css({
     top: 0,
     left: '200%',
-    border: '1px solid #25EF20',
 })
 
 export const MaskTitle = styled('div', {
     bc: colors.TRANSPARENT,
-    // borderRadius: '16px',
     width: '100%',
     height: '100%',
     padding: '1rem',
@@ -98,9 +92,8 @@ export const MaskTitle = styled('div', {
     gap: '1rem',
     top: 0,
     left: 0,
-    zIndex: 2,
+    zIndex: 5005,
     backdropFilter: 'blur(20px)',
-    // boxShadow: '6px 16px 20px 6px #5cb5a5e6, 11px -4px 13px #c0ff00bf',
 })
 
 export const VolumeTrackBack = styled('div', {

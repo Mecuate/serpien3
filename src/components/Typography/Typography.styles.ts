@@ -136,3 +136,10 @@ export const TextContainer = styled('span', {
         font: '$sans',
     },
 })
+
+export const HTLMContainer = styled(TextContainer, {
+    overflow: 'auto',
+    scrollbarColor: 'initial',
+    scrollbarWidth: 'inherit',
+    scrollbarGutter: 'auto',
+})
