@@ -14,15 +14,28 @@ export const useVideoJS = (
     const [videoHasEnded, setVideoHasEnded] = useState(false)
     const [isPlaying, setIsPlaying] = useState(false)
 
-    const tooglePlay = useCallback(() => {
-        if (isPlaying) {
-            player.pause()
-            setIsPlaying(false)
-            return
-        }
-        setIsPlaying(true)
-        player.play()
-    }, [player, isPlaying])
+    const tooglePlay = useCallback(
+        (action?: 'stop' | 'play') => {
+            if (action === 'stop') {
+                player.pause()
+                setIsPlaying(false)
+                return
+            }
+            if (action === 'play') {
+                player.play()
+                setIsPlaying(true)
+                return
+            }
+            if (isPlaying) {
+                player.pause()
+                setIsPlaying(false)
+                return
+            }
+            setIsPlaying(true)
+            player.play()
+        },
+        [player, isPlaying]
+    )
 
     useEffect(() => {
         return () => {

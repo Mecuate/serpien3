@@ -6,8 +6,24 @@ export const VideoPlayer = () => {
     // const v1 = useRef<HTMLDivElement | null>(null)
     // const v2 = useRef<HTMLDivElement | null>(null)
     // const v3 = useRef<HTMLDivElement | null>(null)
-    const { src, poster, decisions, autoplay, ident, muted, keepAsPlayback, classStyle } =
-        useGetVideoConfiguration()
+    const {
+        isLoading,
+        isError,
+        src,
+        poster,
+        shapeMap,
+        autoplay,
+        ident,
+        muted,
+        keepAsPlayback,
+        classStyle,
+        decisionColor,
+        decisions,
+    } = useGetVideoConfiguration()
+
+    if (isLoading || isError) {
+        return <div>Loading...</div>
+    }
 
     return (
         <VideoContainer data-vjs-player>
@@ -20,6 +36,8 @@ export const VideoPlayer = () => {
                 muted={muted}
                 autoplay={autoplay}
                 keepAsPlayback={keepAsPlayback}
+                decisionColor={decisionColor}
+                shapeMap={shapeMap}
             />
         </VideoContainer>
     )

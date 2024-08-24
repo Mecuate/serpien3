@@ -5,6 +5,7 @@ import { DecisionType } from 'models/video'
 import { useAudioFXContext } from 'context/AudioFXContext/AudioFXController'
 import { useVideoJS } from 'hooks/useVideoJS'
 import { DecisionCanvas, DESCOLOR } from 'components/DecisionCanvas/DecisionCanvas'
+import { MShapeMAP } from 'components/DecisionCanvas/dataCollections'
 
 type VideoCanvasProps = {
     decisions: DecisionType[]
@@ -15,14 +16,8 @@ type VideoCanvasProps = {
     muted?: boolean
     autoplay?: boolean
     keepAsPlayback?: boolean
-}
-const playerOptions = {
-    controls: true,
-    // autoplay: true,
-    autoplay: false,
-    preload: 'auto',
-    // fluid: true,
-    responsive: true,
+    decisionColor: DESCOLOR
+    shapeMap: MShapeMAP
 }
 
 export const VideoCanvas = ({
@@ -32,18 +27,28 @@ export const VideoCanvas = ({
     poster,
     muted,
     keepAsPlayback,
+    autoplay = false,
+    decisionColor = DESCOLOR.COLD,
+    shapeMap = MShapeMAP.AARAT,
     decisions,
 }: VideoCanvasProps) => {
+    const [autoPlayable, setAutoPLayable] = useState(keepAsPlayback ? false : autoplay)
+
     const videoRef = useMemo(() => createRef<HTMLVideoElement>(), [])
-    const { player, videoHasEnded, isPlaying, tooglePlay } = useVideoJS(videoRef, playerOptions)
+    const { player, videoHasEnded, isPlaying, tooglePlay } = useVideoJS(videoRef, {
+        controls: true,
+        preload: 'auto',
+        responsive: true,
+        autoplay: autoPlayable,
+    })
     const [showMeta, setShowMeta] = useState(false)
-    // const { stopForDecision, pausedTime, playRate, timeLineVal }
     const plyDesc = usePlayerDecisions({
         videoRef,
         player,
         decisions,
         videoHasEnded,
         isPlaying,
+        tooglePlay,
     })
 
     const displayMeta = useCallback(
@@ -67,26 +72,24 @@ export const VideoCanvas = ({
         <StandByVideoContainer className={classStyles}>
             <Video
                 ref={videoRef}
-                onClick={tooglePlay}
+                onClick={() => tooglePlay()}
                 id={ident}
-                className="video-js"
+                className="video-js html5-video-player"
                 poster={poster}
                 muted={muted}
+                autoPlay={autoPlayable}
                 disablePictureInPicture
             >
                 <source src={src} type="video/mp4" />
             </Video>
-            
-                <MaskTitle>
-                    <DecisionCanvas variant={DESCOLOR.FOREST} />
-                </MaskTitle>
+
             {plyDesc.stopForDecision && (
                 <MaskTitle>
-                    <DecisionCanvas variant={DESCOLOR.FOREST} />
+                    <DecisionCanvas decisions={decisions} decisionColor={decisionColor} shapeMap={shapeMap} />
                 </MaskTitle>
             )}
 
-            {showMeta && (
+            {!showMeta && (
                 <pre
                     style={{
                         position: 'absolute',

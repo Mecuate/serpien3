@@ -8,6 +8,7 @@ type UseDecisionsProps = {
     decisions: any[]
     player: any
     videoRef: React.RefObject<HTMLVideoElement | null>
+    tooglePlay: (action?: 'stop' | 'play') => void
     videoHasEnded?: boolean
     isPlaying?: boolean
 }
@@ -18,6 +19,7 @@ export const usePlayerDecisions = ({
     videoRef,
     videoHasEnded,
     isPlaying,
+    tooglePlay,
 }: UseDecisionsProps) => {
     const { audioBackgroundRef } = useAudioFXContext()
     const activeDecisions = useMemo(() => defineDesicions(decisions), [decisions])
@@ -164,9 +166,19 @@ export const usePlayerDecisions = ({
     Loop evaluations from video time line
     */
     const decisionEffect = useCallback(
-        async ({ duration }: DecisionType) => {
+        async ({ duration, start, end }: DecisionType) => {
             backSoundIn()
             slowDown(2)
+            const limitPoint = end - start
+
+            let stopingLimit: NodeJS.Timeout | undefined
+
+            if (limitPoint < duration * 1000) {
+                stopingLimit = setTimeout(() => {
+                    tooglePlay('stop')
+                    clearInterval(stopingLimit)
+                }, limitPoint)
+            }
             return new Promise<NodeJS.Timeout>((resolve) => {
                 const wait = setTimeout(() => {
                     resolve(wait)
@@ -177,9 +189,10 @@ export const usePlayerDecisions = ({
                 backSoundOut()
                 setForDecision(false, '')
                 restorePlayerVolume(1)
+                tooglePlay('play')
             })
         },
-        [setForDecision, backSoundIn, backSoundOut, slowDown, restorePlayerVolume]
+        [setForDecision, backSoundIn, backSoundOut, slowDown, restorePlayerVolume, tooglePlay]
     )
 
     useEffect(() => {

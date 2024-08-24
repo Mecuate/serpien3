@@ -16,8 +16,8 @@ export const VideoScreen = () => {
                     color: 'white',
                 }}
             >
-                <VideoPlayer />
             </div>
+                <VideoPlayer />
         </Screen>
     )
 }

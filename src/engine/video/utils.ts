@@ -11,6 +11,10 @@ export const fnEv = (item: number, time: number) => {
 }
 
 export const isTimeForDesicion = (stopSteps: number[], timeLineVal: number) => {
+    if (timeLineVal <= 100) {
+        return { assigned: -1, triggerDecision: false }
+    }
+
     let assigned = -1
 
     const triggerDecision = stopSteps.some((step, i) => {

@@ -1,7 +1,37 @@
+import { MShapeMAP } from 'components/DecisionCanvas/dataCollections'
+import { DESCOLOR } from 'components/DecisionCanvas/DecisionCanvas'
+
+export type DTT = 'info' | 'video' | 'audio' | 'image' | 'inter'
+
 export type DecisionType = {
     id: string
     start: number
     end: number
     slow: boolean
     duration: number
+    decisionType: DTT
+    decisionTitle?: string
+    decisionContent?: string
+    decisionAction?: string
+}
+
+export type VideoDataType = {
+    root: {
+        src: string
+        poster: string
+        id: string
+        shapeMap: MShapeMAP
+        decisionColor: DESCOLOR
+        autoplay: boolean
+        muted: boolean
+        keepAsPlayback: boolean
+        decisions: DecisionType[]
+    }
+    next: {
+        [key: number]: {
+            src: string
+            poster: string
+            id: string
+        }
+    }
 }
