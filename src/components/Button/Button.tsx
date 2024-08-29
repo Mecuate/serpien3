@@ -60,7 +60,7 @@ export const Button = ({
     )
 }
 
-const MainActionButton = ({
+const HTMLActionButton = ({
     text,
     variant,
     color = colors.TEXT,
@@ -79,7 +79,7 @@ const ActionButton = ({
     size,
     ...rest
 }: ButtonProps) => {
-    return <Button text={text} variant={'action'} color={color} {...rest} />
+    return <Button text={''} variant={'action'} color={color} {...rest} />
 }
 
 const RoundAction = ({
@@ -87,7 +87,6 @@ const RoundAction = ({
     variant,
     color = colors.TEXT,
     onClick = () => {},
-    size,
     iconColor,
     ...rest
 }: ButtonProps) => {
@@ -100,21 +99,23 @@ const IconButton = ({
     color = colors.PRIMARY,
     onClick = () => {},
     size = 'small',
+    text,
     ...rest
 }: ButtonProps) => {
-    return <Button variant={'icon'} color={color} size={size} {...rest} />
+    return <Button text={''} variant={'icon'} color={color} size={size} {...rest} />
 }
 
 const ClearIconButton = ({
     color = colors.PRIMARY,
     onClick = () => {},
     size = 'solo',
+    text,
     ...rest
 }: ButtonProps) => {
-    return <Button variant={'clearicon'} color={color} size={size} {...rest} />
+    return <Button text={''} variant={'clearicon'} color={color} size={size} {...rest} />
 }
 
-Button.MainAction = MainActionButton
+Button.HTMLAction = HTMLActionButton
 Button.Action = ActionButton
 Button.RoundAction = RoundAction
 Button.Icon = IconButton

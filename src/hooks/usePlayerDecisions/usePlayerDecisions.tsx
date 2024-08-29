@@ -95,13 +95,6 @@ export const usePlayerDecisions = ({
         [smoothRef, audioBackgroundRef.current]
     )
 
-    const speedTo = useCallback(
-        (cap: number) => {
-            setPlayRate(cap)
-        },
-        [setPlayRate, playRate]
-    )
-
     const slowDown = useCallback(
         (n: number) => {
             const expectedMax = Math.floor((n * 1000) / 16.66)
@@ -188,12 +181,42 @@ export const usePlayerDecisions = ({
                 clearTimeout(wait)
                 backSoundOut()
                 setForDecision(false, '')
+                setCurrentDecision({} as DecisionType)
                 restorePlayerVolume(1)
                 tooglePlay('play')
             })
         },
-        [setForDecision, backSoundIn, backSoundOut, slowDown, restorePlayerVolume, tooglePlay]
+        [
+            setForDecision,
+            backSoundIn,
+            backSoundOut,
+            slowDown,
+            restorePlayerVolume,
+            tooglePlay,
+            setCurrentDecision,
+        ]
     )
+
+    const resumePlay = useCallback(async () => {
+        shunt.current = true
+
+        return new Promise(() => {
+            backSoundOut()
+            // restorePlayerVolume(1)
+            setForDecision(false, '')
+            setCurrentDecision({} as DecisionType)
+            tooglePlay('play')
+            player && player.volume(1)
+        })
+    }, [
+        setForDecision,
+        backSoundOut,
+        restorePlayerVolume,
+        tooglePlay,
+        setCurrentDecision,
+        shunt,
+        player,
+    ])
 
     useEffect(() => {
         if (stopForDecision || !shunt.current) {
@@ -266,5 +289,14 @@ export const usePlayerDecisions = ({
         }
     }, [videoHasEnded, isPlaying])
 
-    return { stopForDecision, pausedTime, timeLineVal, playRate, speedTo, intData, currentID }
+    return {
+        stopForDecision,
+        pausedTime,
+        timeLineVal,
+        playRate,
+        intData,
+        currentID,
+        currentDecision,
+        resumePlay,
+    }
 }

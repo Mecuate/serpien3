@@ -5,6 +5,7 @@ export type DTT = 'info' | 'video' | 'audio' | 'image' | 'inter'
 
 export type DecisionType = {
     id: string
+    position: number
     start: number
     end: number
     slow: boolean
@@ -13,6 +14,7 @@ export type DecisionType = {
     decisionTitle?: string
     decisionContent?: string
     decisionAction?: string
+    decisionImg?: string
 }
 
 export type VideoDataType = {

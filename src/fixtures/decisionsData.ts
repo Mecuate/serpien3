@@ -291,22 +291,3 @@ An {alpha-value} representing the alpha channel value of the output color, where
 `,
     },
 ]
-export const sampleImages = [
-    '/snke_1.jpg',
-    '/snke_2.jpg',
-    '/snke_3.jpg',
-    '/snke_4.jpg',
-    '/snke_5.jpg',
-    '/snke_6.jpg',
-    '/snke_7.jpg',
-    '/snke_8.jpg',
-    '/snke_9.jpg',
-    '/snke_10.jpg',
-    '/snke_11.jpg',
-    '/snke_12.jpg',
-    '/snke_13.jpg',
-    '/snke_14.jpg',
-    '/snke_15.jpg',
-    '/snke_16.jpg',
-    '/snke_17.jpg',
-]

@@ -162,19 +162,19 @@ export enum MShapeMAP {
 }
 
 export const maps = {
-    [MShapeMAP.AARAT]: [9, 4, 3, 8, 1],
-    [MShapeMAP.BURAT]: [10, 9, 0, 4, 5],
-    [MShapeMAP.CARAT]: [0, 3, 2, 4, 9],
-    [MShapeMAP.DERAT]: [0, 3, 8, 7, 4, 5],
-    [MShapeMAP.EERAT]: [0, 2, 5, 8, 7, 3],
-    [MShapeMAP.FERAT]: [10, 3, 2, 6, 4],
-    [MShapeMAP.GERAT]: [16, 14, 10, 0, 5],
-    [MShapeMAP.HERAT]: [9, 4, 5, 2, 3],
-    [MShapeMAP.IERAT]: [3, 1, 7, 4, 9],
+    [MShapeMAP.AARAT]: [9, 4, 3, 8, 1, 0, 2, 5, 7, 6, 10, 11, 12, 13, 14, 15, 16],
+    [MShapeMAP.BURAT]: [10, 9, 0, 4, 5, 1, 2, 3, 6, 7, 8, 11, 12, 13, 14, 15, 16],
+    [MShapeMAP.CARAT]: [0, 3, 2, 4, 9, 1, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16],
+    [MShapeMAP.DERAT]: [0, 3, 8, 7, 4, 5, 1, 2, 6, 9, 10, 11, 12, 13, 14, 15, 16],
+    [MShapeMAP.EERAT]: [0, 2, 5, 8, 7, 3, 1, 4, 6, 9, 10, 11, 12, 13, 14, 15, 16],
+    [MShapeMAP.FERAT]: [10, 3, 2, 6, 4, 0, 1, 5, 7, 8, 9, 11, 12, 13, 14, 15, 16],
+    [MShapeMAP.GERAT]: [16, 14, 10, 0, 5, 1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 15],
+    [MShapeMAP.HERAT]: [9, 4, 5, 2, 3, 0, 1, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16],
+    [MShapeMAP.IERAT]: [3, 1, 7, 4, 9, 0, 2, 5, 6, 8, 10, 11, 12, 13, 14, 15, 16],
     [MShapeMAP.JERAT]: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-    [MShapeMAP.KERAT]: [14, 1, 0, 2, 5, 4],
-    [MShapeMAP.LARAT]: [2, 3, 1, 6, 5, 0, 7],
-    [MShapeMAP.MURAT]: [0, 1, 13, 7, 6],
+    [MShapeMAP.KERAT]: [14, 1, 0, 2, 5, 4, 3, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16],
+    [MShapeMAP.LARAT]: [2, 3, 1, 6, 5, 0, 7, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+    [MShapeMAP.MURAT]: [0, 1, 13, 7, 6, 2, 3, 4, 5, 8, 9, 10, 11, 12, 14, 15, 16],
 }
 
 export const mainShapes = [

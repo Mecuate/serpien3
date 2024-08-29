@@ -1,6 +1,6 @@
 import { styled, css } from 'stitches.conf'
 import { colors } from 'styles/colors'
-import { pulse, vactorLine } from 'styles/keyframes'
+import { pulse, vectorLine } from 'styles/keyframes'
 
 export const DecisionContainer = styled('div', {
     position: 'relative',
@@ -15,14 +15,17 @@ export const DecisionContainer = styled('div', {
 
     variants: {
         variant: {
+            white: {
+                color: colors.SURFACE[100],
+            },
             golden: {
                 color: colors.WARN[200],
             },
             forest: {
-                color: colors.SUCCESS[300],
+                color: colors.FOREST[100],
             },
             cold: {
-                color: colors.SKY,
+                color: colors.COLD[100],
             },
         },
     },
@@ -44,7 +47,7 @@ export const ContentContainer = styled('div', {
     justifyContent: 'flex-end',
     width: '50%',
     maxHeight: '100%',
-    paddingHorizontal: '$4' ,
+    paddingHorizontal: '$4',
 })
 export const ContentArea = styled('div', {
     position: 'relative',
@@ -64,7 +67,6 @@ export const ContentArea = styled('div', {
     '& :nth-child(2)#DescriptionSection': {
         marginBottom: 'calc(80px + $5)',
     },
-    
 })
 export const ActionSection = styled('div', {
     position: 'absolute',
@@ -117,16 +119,17 @@ export const cssls_5 = css({
 export const cssls_6 = css({
     fill: 'none',
     stroke: 'CurrentColor',
+    strokeWidth: '3px',
     strokeMiterlimit: 10,
-    strokeDasharray: '1200',
-    strokeDashoffset: 1500,
-    animation: `${vactorLine} 550ms forwards`,
+    strokeDasharray: 2000,
+    strokeDashoffset: 1800,
+    animation: `${vectorLine} 550ms forwards`,
 })
 export const cssls_7 = css({
     fill: 'CurrentColor',
     stroke: colors.DARK[100],
     boxShadow: `0 0 10px ${colors.SUCCESS[300]}`,
-    opacity: 0.3,
+    opacity: 0.2,
     transition: 'all 0.3s ease-in-out',
 
     '&:hover': {
@@ -142,7 +145,7 @@ export const openedStyle = css({
     transition: 'all 0.3s ease-in-out',
 })
 export const staticImage = css({
-    opacity: 0.65,
+    opacity: 0.75,
     transition: 'all 150ms ease-in-out',
 })
 export const activeImage = css({

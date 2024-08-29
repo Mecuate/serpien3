@@ -10,43 +10,62 @@ import {
     openedStyle,
     staticImage,
 } from './DecisionCanvas.styles'
+import { DecisionType } from 'models/video'
 
 type MainShapesProps = {
     shapeMap: MShapeMAP
-    imgAssets: string[]
+    decisions: DecisionType[]
+    currentDecision: DecisionType
+    setIsUserOver: (value: boolean, id: string) => void
+    isUserOver: boolean
+    setOpenedItem: (value: string) => void
+    openedItem: string
+    setPreviewedDecision: (desc: DecisionType) => void
 }
 
-export const MainShapes = ({ shapeMap, imgAssets }: MainShapesProps) => {
-    const [openedItem, setOpenedItem] = useState('')
-    const [isUserOver, setIsUserOver] = useState(false)
+export const MainShapes = ({
+    shapeMap,
+    decisions,
+    currentDecision,
+    setIsUserOver,
+    setOpenedItem,
+    isUserOver,
+    openedItem,
+    setPreviewedDecision,
+}: MainShapesProps) => {
     const [rotVal, setRotVal] = useState(0)
     const [CX, setCX] = useState(40)
     const [CY, setCY] = useState(40)
-    const [A1, setA1] = useState('8,8,0,0,1-9-5.5')
-    const [A2, setA2] = useState('8,8,0,0,0-9-5.5')
 
     const handleMouseEnter: MouseEventHandler<SVGPathElement> = ({ target }) => {
         const id = (target as SVGPathElement).id
 
-        const { cx, cy, a1, a2, r } = locatorPositions.find(({ target }) => target === id) ?? {
+        const { cx, cy, r } = locatorPositions.find(({ target }) => target === id) ?? {
             cx: 0,
             cy: 0,
-            a1: '8,8,0,0,1-9-5.5',
-            a2: '8,8,0,0,0-9-5.5',
             r: Math.floor(Math.random() * 360),
         }
         setRotVal(r)
         setCX(cx)
         setCY(cy)
-        setA1(a1)
-        setA2(a2)
-        setIsUserOver(true)
+        setIsUserOver(true, id)
     }
     const handleMouseLeave: MouseEventHandler<SVGPathElement> = ({ target }) => {
-        setIsUserOver(false)
+        const id = (target as SVGPathElement).id
+        setIsUserOver(false, id)
     }
-    const handleMouseclick: MouseEventHandler<SVGPathElement> = ({ target }) => {
-        setOpenedItem((target as SVGPathElement).id)
+    const handleMouseclick = (targetID: { target: { id: string } }, desc: DecisionType) => {
+        const id = targetID.target.id
+        setOpenedItem(id)
+        setPreviewedDecision(desc)
+
+        const { cx, cy } = locatorPositions.find(({ target }) => target === id) ?? {
+            cx: 0,
+            cy: 0,
+            r: Math.floor(Math.random() * 360),
+        }
+        setCX(cx)
+        setCY(cy)
     }
 
     return (
@@ -57,14 +76,15 @@ export const MainShapes = ({ shapeMap, imgAssets }: MainShapesProps) => {
                 handleMouseclick={handleMouseclick}
                 shapeMap={shapeMap}
                 opened={openedItem}
-                imgAssets={imgAssets}
+                decisions={decisions}
+                currentDecision={currentDecision}
             />
             {isUserOver && (
                 <>
                     <path
                         id="locatorPositionVectorLine"
                         className={cssls_6()}
-                        d={`M${CX},${CY}H-26.51a${A1}L-210,30a${A2}H-490`}
+                        d={`M${CX},${CY},${CX-80},${CY},-10,1,-50,1`}
                     />
                     <g id="shapeLocator">
                         <circle className={cssls_9()} cx={CX} cy={CY} r="9" />
@@ -85,10 +105,11 @@ export const MainShapes = ({ shapeMap, imgAssets }: MainShapesProps) => {
 type BakedShapesProps = {
     handleMouseEnter: MouseEventHandler<SVGPathElement>
     handleMouseLeave: MouseEventHandler<SVGPathElement>
-    handleMouseclick: MouseEventHandler<SVGPathElement>
+    handleMouseclick: (id: { target: { id: string } }, d: DecisionType) => void
     opened: string
     shapeMap: MShapeMAP
-    imgAssets: string[]
+    decisions: DecisionType[]
+    currentDecision: DecisionType
 }
 
 const BakedShapes = ({
@@ -97,19 +118,31 @@ const BakedShapes = ({
     handleMouseclick,
     shapeMap,
     opened,
-    imgAssets,
+    decisions,
+    currentDecision,
 }: BakedShapesProps) => {
     const cssls7 = cssls_7()
-    const mps = maps[shapeMap]
+    const activeMap = maps[shapeMap]
+    let thisDecision: DecisionType | null = null
+
+    useEffect(() => {
+        if ((thisDecision = decisions.find(({ id }) => id === currentDecision.id) ?? null)) {
+            const { id } = mainShapes[activeMap[thisDecision.position]]
+            const tempSend: any = { target: { id: id } }
+            handleMouseclick(tempSend, thisDecision)
+            handleMouseEnter(tempSend)
+        }
+    }, [currentDecision])
 
     return useMemo(() => {
-        return mainShapes.map(({ id, d }, i) => {
+        return decisions.map((desicion) => {
+            const { position, decisionImg, id: evID } = desicion
+            const { id, d } = mainShapes[activeMap[position]]
             const { origin } = locatorPositions.find(({ target }) => target === id) ?? {
                 origin: '0 0',
             }
-            const active = opened === id
-
-            return mps.includes(i) ? (
+            const active = !!thisDecision ? thisDecision.id === evID : opened === id
+            return (
                 <Fragment key={`keyint-desc.shape.${id}`}>
                     <clipPath id={`${id}_clip`}>
                         <path d={d} />
@@ -124,7 +157,7 @@ const BakedShapes = ({
                             width="300"
                             height="300"
                             transform={`translate(${origin})`}
-                            xlinkHref={imgAssets[i]}
+                            xlinkHref={decisionImg}
                         />
                     </g>
                     <path
@@ -133,10 +166,10 @@ const BakedShapes = ({
                         d={d}
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
-                        onClick={handleMouseclick}
+                        onClick={() => handleMouseclick({ target: { id: id } }, desicion)}
                     />
                 </Fragment>
-            ) : null
+            )
         })
     }, [opened])
 }

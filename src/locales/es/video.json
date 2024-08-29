@@ -1,6 +1,28 @@
 {
     "titles": {
         "videoName": "Video: {{name}}",
-        "length": "length {{length}}"
+        "length": "duración: {{length}}"
+    },
+    "decisions": {
+        "waitUntilFinnish": "segundos para continuar"
+    },
+    "player": {
+        "play": "Play",
+        "pause": "Pausa",
+        "stop": "Detener",
+        "mute": "Silenciar",
+        "fullscreen": "Pantalla completa",
+        "exitFullscreen": "Salir de pantalla completa",
+        "settings": "Configuración",
+        "quality": "Calidad",
+        "subtitles": "Subtitulos",
+        "back": "Retroceder",
+        "forward": "Avanzar",
+        "replay": "Repetir",
+        "volume": "Volumen",
+        "duration": "Duración",
+        "error": "Error",
+        "loading": "Cargando",
+        "skip": "Saltar"
     }
 }

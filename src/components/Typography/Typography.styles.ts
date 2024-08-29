@@ -44,7 +44,6 @@ export const TextContainer = styled('span', {
                 display: 'block',
                 fontSize: '48px',
                 lineHeight: 1.2,
-                overflow: 'hidden',
                 whiteSpace: 'nowrap',
                 textOverflow: 'ellipsis',
             },

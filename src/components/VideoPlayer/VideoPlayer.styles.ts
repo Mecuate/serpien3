@@ -1,6 +1,6 @@
 import { styled, css, globalCss } from 'stitches.conf'
 import { colors } from 'styles/colors'
-import { videoControlsFadeOutSlow } from 'styles/keyframes'
+import { blurIn, videoControlsFadeOutSlow } from 'styles/keyframes'
 import { VCIDs } from './utils'
 
 export const VideoContainer = styled('div', {
@@ -93,11 +93,36 @@ export const MaskTitle = styled('div', {
     top: 0,
     left: 0,
     zIndex: 5005,
-    backdropFilter: 'blur(20px)',
+    backdropFilter: 'blur(24px)',
+    borderRadius: '0 0 44% 87% / 0 0 25% 36%',
+    borderBottom: `1mm solid ${colors.SOIL[100]}24`,
+    borderLeft: `1mm solid ${colors.SOIL[100]}24`,
+    borderRight: `1mm solid ${colors.SOIL[100]}24`,
+
+    transition: 'all 950ms cubic-bezier(0.17, 0.77, 0.83, 1)',
+
+    variants: {
+        pos: {
+            true: {
+                top: 0,
+                borderRadius: '0 0 0% 0% / 0 0 0% 0%',
+                borderBottom: `1mm solid ${colors.SOIL[100]}10`,
+                borderLeft: `1mm solid ${colors.SOIL[100]}07`,
+                borderRight: `1mm solid ${colors.SOIL[100]}07`,
+            },
+            false: {
+                borderBottom: `1mm solid ${colors.SOIL[100]}24`,
+                borderLeft: `1mm solid ${colors.SOIL[100]}24`,
+                borderRight: `1mm solid ${colors.SOIL[100]}24`,
+                borderRadius: '0 0 44% 87% / 0 0 25% 36%',
+                top: '-110%',
+            },
+        },
+    },
 })
 
 export const VolumeTrackBack = styled('div', {
-    bc: colors.PALETTE[-500],
+    bc: colors.SOIL[-500],
     borderRadius: '16px',
     minWidth: '48px',
     maxWidth: '64px',
@@ -136,23 +161,23 @@ export const VideoControlsSVGStyles = globalCss({
     'input[type="range"]::-webkit-slider-runnable-track': {
         position: 'relative',
         height: '8px',
-        backgroundColor: colors.PALETTE[100],
+        backgroundColor: colors.SOIL[100],
         borderRadius: '$3',
-        background: `linear-gradient(to right, ${colors.PALETTE[100]} 0%, ${colors.PALETTE[200]} 20%, ${colors.PALETTE[300]} 60%, ${colors.PALETTE[500]} 80%)`,
+        background: `linear-gradient(to right, ${colors.SOIL[100]} 0%, ${colors.SOIL[200]} 20%, ${colors.SOIL[300]} 60%, ${colors.SOIL[500]} 80%)`,
     },
     'input[type="range"]::-moz-range-track': {
         position: 'relative',
         height: '8px',
-        backgroundColor: colors.PALETTE[100],
+        backgroundColor: colors.SOIL[100],
         borderRadius: '$3',
-        background: `linear-gradient(to right, ${colors.PALETTE[100]} 0%, ${colors.PALETTE[200]} 20%, ${colors.PALETTE[300]} 60%, ${colors.PALETTE[500]} 80%)`,
+        background: `linear-gradient(to right, ${colors.SOIL[100]} 0%, ${colors.SOIL[200]} 20%, ${colors.SOIL[300]} 60%, ${colors.SOIL[500]} 80%)`,
     },
     'input[type="range"]::-webkit-slider-thumb': {
         boxSizing: 'border-box',
         appearance: 'none',
         position: 'relative',
-        backgroundColor: colors.PALETTE[100],
-        border: `1px solid ${colors.PALETTE[200]}`,
+        backgroundColor: colors.SOIL[100],
+        border: `1px solid ${colors.SOIL[200]}`,
         borderRadius: '$round',
         width: '16px',
         height: '16px',
@@ -163,19 +188,19 @@ export const VideoControlsSVGStyles = globalCss({
         boxSizing: 'border-box',
         appearance: 'none',
         position: 'relative',
-        backgroundColor: colors.PALETTE[100],
-        border: `1px solid ${colors.PALETTE[200]}`,
+        backgroundColor: colors.SOIL[100],
+        border: `1px solid ${colors.SOIL[200]}`,
         borderRadius: '$round',
         width: '16px',
         height: '16px',
     },
     'input[type="range"]::-moz-range-progress': {
         height: '8px',
-        backgroundColor: `${colors.PALETTE[200]}50`,
+        backgroundColor: `${colors.SOIL[200]}50`,
         borderRadius: '8px',
     },
     '#GUIpause, #GUIplay, #GUIenter, #GUIexit, #GUIcc, #GUIvolume': {
-        fill: colors.PALETTE[100],
+        fill: colors.SOIL[100],
     },
     [VOLUME_BAR]: {
         '&:hover': {
@@ -183,17 +208,17 @@ export const VideoControlsSVGStyles = globalCss({
         },
     },
     [TIME_LINE_BASE]: {
-        stroke: colors.PALETTE[100],
+        stroke: colors.SOIL[100],
         opacity: 0.2,
     },
     [TIME_LINE_FULL]: {
-        stroke: colors.PALETTE[300],
+        stroke: colors.SOIL[300],
         opacity: 1,
     },
     [TIMELINE_POINTER]: {
-        fill: colors.PALETTE[200],
+        fill: colors.SOIL[200],
         '&:hover': {
-            fill: colors.PALETTE[400],
+            fill: colors.SOIL[400],
         },
     },
     // [BUTTON_ENTER_FS]: { fill: 'pink', opacity: 0.5 },

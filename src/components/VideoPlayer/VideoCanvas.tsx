@@ -32,7 +32,7 @@ export const VideoCanvas = ({
     shapeMap = MShapeMAP.AARAT,
     decisions,
 }: VideoCanvasProps) => {
-    const [autoPlayable, setAutoPLayable] = useState(keepAsPlayback ? false : autoplay)
+    const [autoPlayable, setAutoPlayable] = useState(keepAsPlayback ? false : autoplay)
 
     const videoRef = useMemo(() => createRef<HTMLVideoElement>(), [])
     const { player, videoHasEnded, isPlaying, tooglePlay } = useVideoJS(videoRef, {
@@ -42,7 +42,16 @@ export const VideoCanvas = ({
         autoplay: autoPlayable,
     })
     const [showMeta, setShowMeta] = useState(false)
-    const plyDesc = usePlayerDecisions({
+    const {
+        stopForDecision,
+        pausedTime,
+        timeLineVal,
+        playRate,
+        intData,
+        currentID,
+        currentDecision,
+        resumePlay,
+    } = usePlayerDecisions({
         videoRef,
         player,
         decisions,
@@ -50,6 +59,10 @@ export const VideoCanvas = ({
         isPlaying,
         tooglePlay,
     })
+
+    const handleResumePlay = useCallback(() => {
+        resumePlay()
+    }, [showMeta, setShowMeta])
 
     const displayMeta = useCallback(
         (e: KeyboardEvent) => {
@@ -83,11 +96,17 @@ export const VideoCanvas = ({
                 <source src={src} type="video/mp4" />
             </Video>
 
-            {plyDesc.stopForDecision && (
-                <MaskTitle>
-                    <DecisionCanvas decisions={decisions} decisionColor={decisionColor} shapeMap={shapeMap} />
-                </MaskTitle>
-            )}
+            <MaskTitle pos={stopForDecision}>
+                <DecisionCanvas
+                    resumePlay={handleResumePlay}
+                    decisions={decisions}
+                    currentDecision={currentDecision}
+                    decisionColor={decisionColor}
+                    shapeMap={shapeMap}
+                    pausedTime={currentDecision.duration - pausedTime}
+                />
+            </MaskTitle>
+            {stopForDecision && null}
 
             {!showMeta && (
                 <pre
@@ -100,7 +119,20 @@ export const VideoCanvas = ({
                         zIndex: 1000,
                     }}
                 >
-                    {JSON.stringify(plyDesc, null, 2)}
+                    {JSON.stringify(
+                        {
+                            stopForDecision,
+                            pausedTime,
+                            timeLineVal,
+                            playRate,
+                            intData,
+                            currentID,
+                            currentDecision,
+                            resumePlay,
+                        },
+                        null,
+                        2
+                    )}
                 </pre>
             )}
         </StandByVideoContainer>
