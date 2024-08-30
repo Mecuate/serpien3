@@ -21,6 +21,17 @@ export const ImageRoot = styled('div', {
                 borderRadius: '$1',
             },
         },
+        size: {
+            L: {
+                width: '120px',
+            },
+            M: {
+                width: '240px',
+            },
+            S: {
+                width: '120px',
+            },
+        },
     },
 })
 

@@ -10,6 +10,13 @@ export const validTranslationKeys = {
         'common:menu.uploads': 'Uploads',
         'common:menu.logout': 'Cerrar sesión',
         'endpoints:save': 'Guardar',
+        'landing:title':
+            '“Sitio web realizado con apoyo del Sistema de Apoyos a la Creación y Proyectos Culturales”',
+        'landing:credits': 'Créditos',
+        'landing:creditsText':
+            'Este sitio web fue realizado con apoyo del Sistema de Apoyos a la Creación y Proyectos Culturales de la Secretaría de Cultura de la Ciudad de México.',
+        'landing:creditsLink': 'https://www.cultura.cdmx.gob.mx/',
+        'landing:continue': 'Continuar viendo',
         'video:titles.videoName': 'Video: {{name}}',
         'video:titles.length': 'duración: {{length}}',
         'video:decisions.waitUntilFinnish': 'segundos para continuar',
@@ -42,6 +49,11 @@ export type iKeyTranslations =
     | 'common:menu.uploads'
     | 'common:menu.logout'
     | 'endpoints:save'
+    | 'landing:title'
+    | 'landing:credits'
+    | 'landing:creditsText'
+    | 'landing:creditsLink'
+    | 'landing:continue'
     | 'video:titles.videoName'
     | 'video:titles.length'
     | 'video:decisions.waitUntilFinnish'

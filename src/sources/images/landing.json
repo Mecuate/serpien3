@@ -1,6 +1,11 @@
 {
     "landingPage": {
         "poster1": "http://localhost/_assets_server/images/cerro/cerro-panoramic-dron.jpg",
-        "poster": "http://127.0.0.1:3000/static/images/cerro/desert.jpg"
+        "poster": "http://127.0.0.1:3000/static/images/cerro/desert.jpg",
+        "logoMecuate": "/img/mecuate-logo.png",
+        "logoReptilia": "/img/reptilia-logo.png",
+        "logoOlmec": "/img/olmec-logo.png",
+        "logoCultura": "/img/cultura-logo.png",
+        "logoProyectos": "/img/sistema-creacion-logo.png"
     }
 }

@@ -8,13 +8,14 @@ export type ImageProps = ImageOwnProps & {
     label?: string
     source?: string
     src?: iKeyNames
+    size?: 'S' | 'M' | 'L'
 }
 
-export const Image = ({ src, source, label, variant }: ImageProps) => {
+export const Image = ({ src, source, label, variant, size }: ImageProps) => {
     const { gi } = useImage()
 
     return (
-        <ImageRoot variant={variant}>
+        <ImageRoot variant={variant} size={size}>
             <ImageSrc src={src ? gi(src) : source} aria-label={label ? label : 'image'} />
         </ImageRoot>
     )

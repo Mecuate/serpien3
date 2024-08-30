@@ -3,7 +3,7 @@ const path = require('path')
 const env = process.env
 
 function _main_() {
-    const _path = `${env.PWD}/src/resources/images`
+    const _path = `${env.PWD}/src/sources/images/`
     const list = fs.readdirSync(_path)
     const allFiles = _readList(list)
     const keys_string = _extract_names(allFiles)
@@ -14,7 +14,7 @@ function _main_() {
         2
     )}\n\nexport type iKeyNames = ${keys_string}`
 
-    fs.writeFileSync(`${env.PWD}/src/resources/imageRepository.ts`, result)
+    fs.writeFileSync(`${env.PWD}/src/sources/imageRepository.ts`, result)
 
     console.log('result terminated')
 }
@@ -50,7 +50,7 @@ function _readList(list) {
     for (const item of list) {
         const file = JSON.parse(
             fs.readFileSync(
-                `${env.PWD}/src/resources/images/${item}`,
+                `${env.PWD}/src/sources/images/${item}`,
                 'utf8',
                 (err, data) => {
                     if (err) {
