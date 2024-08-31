@@ -26,7 +26,9 @@ export const TextContainer = styled('span', {
                 fontSize: '11pt',
             },
             normal: {
-                fontSize: '12pt',
+                fontSize: '14pt',
+                letterSpacing: 0.7,
+                lineHeight: 1.35,
             },
             mid: {
                 fontSize: '14pt',

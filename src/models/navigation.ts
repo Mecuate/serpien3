@@ -6,14 +6,14 @@ export enum APP_PATH {
     MENU = '/menu',
     HOME = '/home/*',
     LANDING = '/landing',
-    VIDEO = '/video/*',
-    DECISION = '/decision/*',
-    INTERACTIVE = '/interactive/*',
-    INFORMATIVE = '/informative/*',
+    VIDEO = '/video/:video_name',
+    DECISION = '/decision/:id',
+    INTERACTIVE = '/interactive/:id',
+    INFORMATIVE = '/informative/:id',
 }
 
 export type NavigationAppType = {
     name: iKeyTranslations
     path: APP_PATH
-    icon: IconNames
+    icon?: IconNames
 }[]

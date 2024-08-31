@@ -7,7 +7,7 @@ export const ImageRoot = styled('div', {
     overflow: 'hidden',
     width: '100%',
     height: '100%',
-    objectFit: 'cover',
+    objectFit: 'contain',
 
     variants: {
         variant: {
@@ -39,8 +39,7 @@ export const ImageSrc = styled('img', {
     display: 'block',
     position: 'relative',
     transition: 'all 100ms ease-out',
-    objectFit: 'cover',
-    backgroundSize: 'cover',
+    objectFit: 'contain',
     width: '100%',
     height: '100%',
 

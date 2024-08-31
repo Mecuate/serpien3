@@ -1,11 +1,10 @@
 {
     "menu": {
-        "home": "Dashboard",
-        "schemas": "Schemas",
-        "content": "Contenidos",
-        "endpoints": "Endpoints",
-        "nodes": "Nodos",
-        "uploads": "Uploads",
-        "logout": "Cerrar sesión"
+        "landing": "inicio",
+        "video": "video",
+        "interactive": "interactive",
+        "informative": "informative",
+        "home": "inicio",
+        "map": "map"
     }
 }

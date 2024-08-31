@@ -1,11 +1,13 @@
 import { VideoContainer } from './VideoPlayer.styles'
 import { useGetVideoConfiguration } from 'hooks/useGetVideoConfiguration'
 import { VideoCanvas } from './VideoCanvas'
+import { useParams } from 'react-router-dom';
 
 export const VideoPlayer = () => {
     // const v1 = useRef<HTMLDivElement | null>(null)
     // const v2 = useRef<HTMLDivElement | null>(null)
     // const v3 = useRef<HTMLDivElement | null>(null)
+    let { video_name } = useParams();
     const {
         isLoading,
         isError,
@@ -19,7 +21,7 @@ export const VideoPlayer = () => {
         classStyle,
         decisionColor,
         decisions,
-    } = useGetVideoConfiguration()
+    } = useGetVideoConfiguration(video_name)
 
     if (isLoading || isError) {
         return <div>Loading...</div>

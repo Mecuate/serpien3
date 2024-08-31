@@ -8,7 +8,7 @@ export const imageRepository =
   "landing:landingPage.logoReptilia": "/img/reptilia-logo.png",
   "landing:landingPage.logoOlmec": "/img/olmec-logo.png",
   "landing:landingPage.logoCultura": "/img/cultura-logo.png",
-  "landing:landingPage.logoProyectos": "/img/sistema-creacion-logo.png",
+  "landing:landingPage.logoProyectos": "/img/sitema-creacion-logo.png",
   "personnel:profile.pepe": "/_assets_server/images/personnel/pepe.jpg"
 }
 

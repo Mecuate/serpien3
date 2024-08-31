@@ -28,9 +28,9 @@ export const Typography = ({
         </TextContainer>
     )
 }
-const TextSmall = ({ children, color = 'midtone', weight = 'semi', ...others }: TextProps) => {
+const TextSmall = ({ children, weight, color = 'midtone', ...others }: TextProps) => {
     return (
-        <Typography {...others} size={'small'} color={color} weight={weight}>
+        <Typography {...others} size={'small'} color={color} weight={'thin'}>
             {children}
         </Typography>
     )
@@ -79,7 +79,12 @@ const TextSubtitle = ({ children, ...others }: TextProps) => {
 }
 const TextHTML = ({ htmlData, ...others }: TextProps) => {
     return htmlData ? (
-        <HTLMContainer {...others} weight={'regular'} size={'normal'} dangerouslySetInnerHTML={{ __html: htmlData }}></HTLMContainer>
+        <HTLMContainer
+            {...others}
+            weight={'regular'}
+            size={'normal'}
+            dangerouslySetInnerHTML={{ __html: htmlData }}
+        ></HTLMContainer>
     ) : (
         <span></span>
     )

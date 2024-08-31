@@ -16,8 +16,8 @@ export const videoMockData: VideoDataType = {
             {
                 id: 'desicion_001',
                 position: 0,
-                start: 3000,
-                end: 6000,
+                start: 31000,
+                end: 36000,
                 slow: true,
                 duration: 22,
                 decisionType: 'info',

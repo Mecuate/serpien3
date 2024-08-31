@@ -1,7 +1,11 @@
 {
-    "title": "“Sitio web realizado con apoyo del Sistema de Apoyos a la Creación y Proyectos Culturales”",
+    "sponsorTitleA": "“Este sitio es apoyado por el Sistema de Apoyos a la Creación y Proyectos Culturales”",
+    "sponsorTitleB": "Sistema de Apoyos a la Creación y Proyectos Culturales”",
+    "welcomeMessage": "Las serpientes han sido temidas, odiadas, amenazadas e incluso sacrificadas, pero ¿Podríamos tratarlas de otra manera? existen tres brigadas comunitarias en Hidalgo dispuestas a cuidarlas, conservarlas y reubicarlas; han aprendido a identificar serpientes, manejarlas e incluso atender mordidas de la mano con Nallely Morales y Leonardo Badillo, apasionados herpetólogos. Las comunidades han pasado del miedo al respeto, de matarlas a protegerlas y de contar mitos a hacer educación ambiental. Aquí podrás ser parte de su historia, conocer su pasado y aquello que les convirtió en amantes de las serpientes.",
+    "docuwebTitle": "Brigadistas con piel de serpientes",
     "credits": "Créditos",
     "creditsText": "Este sitio web fue realizado con apoyo del Sistema de Apoyos a la Creación y Proyectos Culturales de la Secretaría de Cultura de la Ciudad de México.",
     "creditsLink": "https://www.cultura.cdmx.gob.mx/",
-    "continue": "Continuar viendo"
+    "continue": "Comenzar"
 }
+

@@ -2,21 +2,23 @@
 
 export const validTranslationKeys = {
     es: {
-        'common:menu.home': 'Dashboard',
-        'common:menu.schemas': 'Schemas',
-        'common:menu.content': 'Contenidos',
-        'common:menu.endpoints': 'Endpoints',
-        'common:menu.nodes': 'Nodos',
-        'common:menu.uploads': 'Uploads',
-        'common:menu.logout': 'Cerrar sesión',
-        'endpoints:save': 'Guardar',
-        'landing:title':
-            '“Sitio web realizado con apoyo del Sistema de Apoyos a la Creación y Proyectos Culturales”',
+        'common:menu.landing': 'inicio',
+        'common:menu.video': 'video',
+        'common:menu.interactive': 'interactive',
+        'common:menu.informative': 'informative',
+        'common:menu.home': 'inicio',
+        'common:menu.map': 'map',
+        'landing:sponsorTitleA':
+            '“Este sitio es apoyado por el Sistema de Apoyos a la Creación y Proyectos Culturales”',
+        'landing:sponsorTitleB': 'Sistema de Apoyos a la Creación y Proyectos Culturales”',
+        'landing:welcomeMessage':
+            'Las serpientes han sido temidas, odiadas, amenazadas e incluso sacrificadas, pero ¿Podríamos tratarlas de otra manera? existen tres brigadas comunitarias en Hidalgo dispuestas a cuidarlas, conservarlas y reubicarlas; han aprendido a identificar serpientes, manejarlas e incluso atender mordidas de la mano con Nallely Morales y Leonardo Badillo, apasionados herpetólogos. Las comunidades han pasado del miedo al respeto, de matarlas a protegerlas y de contar mitos a hacer educación ambiental. Aquí podrás ser parte de su historia, conocer su pasado y aquello que les convirtió en amantes de las serpientes.',
+        'landing:docuwebTitle': 'Brigadistas con piel de serpientes',
         'landing:credits': 'Créditos',
         'landing:creditsText':
             'Este sitio web fue realizado con apoyo del Sistema de Apoyos a la Creación y Proyectos Culturales de la Secretaría de Cultura de la Ciudad de México.',
         'landing:creditsLink': 'https://www.cultura.cdmx.gob.mx/',
-        'landing:continue': 'Continuar viendo',
+        'landing:continue': 'Comenzar',
         'video:titles.videoName': 'Video: {{name}}',
         'video:titles.length': 'duración: {{length}}',
         'video:decisions.waitUntilFinnish': 'segundos para continuar',
@@ -41,15 +43,16 @@ export const validTranslationKeys = {
 }
 
 export type iKeyTranslations =
+    | 'common:menu.landing'
+    | 'common:menu.video'
+    | 'common:menu.interactive'
+    | 'common:menu.informative'
     | 'common:menu.home'
-    | 'common:menu.schemas'
-    | 'common:menu.content'
-    | 'common:menu.endpoints'
-    | 'common:menu.nodes'
-    | 'common:menu.uploads'
-    | 'common:menu.logout'
-    | 'endpoints:save'
-    | 'landing:title'
+    | 'common:menu.map'
+    | 'landing:sponsorTitleA'
+    | 'landing:sponsorTitleB'
+    | 'landing:welcomeMessage'
+    | 'landing:docuwebTitle'
     | 'landing:credits'
     | 'landing:creditsText'
     | 'landing:creditsLink'
