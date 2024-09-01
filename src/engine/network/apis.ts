@@ -36,18 +36,17 @@ export const createFetch = async (
         .catch((err) => err)
 }
 
-const obtainBaseURL = (baseURL:string,endpoint:string,prefix?:string) => {
-    let URL = ''
-    if (prefix) {
-        URL += `${prefix}/`
-    }
-    return `${URL}${baseURL}${endpoint}`
+const obtainBaseURL = (baseURL: string, endpoint: string, apiBaseName: string) => {
+    return `${baseURL}/${apiBaseName}/${
+        endpoint.startsWith('/') ? endpoint.substring(1, endpoint.length) : endpoint
+    }`
 }
 
-export const createAPIClient = (baseURL: string, prefix?: string) => {
+export const createAPIClient = (baseURL: string, apiBaseName: string) => {
     async function client(endpoint: URL, method: Method, config: FetchConfig) {
         const { responseType } = config
-        let url = obtainBaseURL(baseURL,endpoint,prefix)
+        let url = obtainBaseURL(baseURL, endpoint, apiBaseName)
+
         let data = config?.data
         const authToken = {
             type: 'Bearer',
@@ -73,15 +72,14 @@ export const createAPIClient = (baseURL: string, prefix?: string) => {
     }
 
     client.get = (url: string, config: FetchConfig) => client(url, Method.GET, config)
-    client.post = (url: string, config: FetchConfig) => client(url, Method.POST, config)
-    client.create = (url: string, config: FetchConfig) => client(url, Method.CREATE, config)
-    client.read = (url: string, config: FetchConfig) => client(url, Method.READ, config)
-    client.update = (url: string, config: FetchConfig) => client(url, Method.UPDATE, config)
-    client.delete = (url: string, config: FetchConfig) => client(url, Method.DELETE, config)
+    // client.post = (url: string, config: FetchConfig) => client(url, Method.POST, config)
+    // client.create = (url: string, config: FetchConfig) => client(url, Method.CREATE, config)
+    // client.read = (url: string, config: FetchConfig) => client(url, Method.READ, config)
+    // client.update = (url: string, config: FetchConfig) => client(url, Method.UPDATE, config)
+    // client.delete = (url: string, config: FetchConfig) => client(url, Method.DELETE, config)
 
     return client
 }
-
-export const AuthRootURL = createAPIClient(AUTH_API,API_V1)
-export const DataRootURL = createAPIClient(DATA_API,API_V1)
-export const MediaRootURL = createAPIClient(MEDIA_API,API_V1)
+export const AuthRootURL = createAPIClient(AUTH_API, API_V1)
+export const DataRootURL = createAPIClient(DATA_API, API_V1)
+export const MediaRootURL = createAPIClient(MEDIA_API, API_V1)

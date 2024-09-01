@@ -1,8 +1,6 @@
 import { uuid } from './generic'
 
-export type UUID = { id: uuid }
-
-export type UUIDS = { ids: uuid[]}
+export type UUID = uuid
 
 export type PaginationParams = {
     start?: number
