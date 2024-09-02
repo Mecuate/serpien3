@@ -106,7 +106,7 @@ export const usePlayerDecisions = ({
                     if (round != playRate) {
                         setPlayRate(round)
                     }
-                    player.volume(p.value2 <= 0 ? 0 : parseFloat(p.value2.toFixed(2)))
+                    player && player.volume(p.value2 <= 0 ? 0 : parseFloat(p.value2.toFixed(2)))
                     return limited <= 0.1
                 },
                 { params: smoothRef(1, -(1 / expectedMax), -0.05, playerVolume), max: expectedMax }
@@ -124,7 +124,8 @@ export const usePlayerDecisions = ({
                 (p: any) => {
                     p.increment()
                     const { raw } = getVal(p.value)
-                    player.volume(raw < 0.05 ? 0.05 : raw > playerVolume ? playerVolume : raw)
+                    player &&
+                        player.volume(raw < 0.05 ? 0.05 : raw > playerVolume ? playerVolume : raw)
                     return raw > 1.1
                 },
                 { params: smoothRef(0.1, 0.02), max: expectedMax }
@@ -210,7 +211,6 @@ export const usePlayerDecisions = ({
                 clearTimeout(wait)
                 backSoundOut()
                 setForDecision(false, '')
-                setCurrentDecision({} as DecisionType)
                 restorePlayerVolume(1)
                 if (decisionAction) {
                     const [action, url] = decisionAction.split('|')
@@ -218,6 +218,7 @@ export const usePlayerDecisions = ({
                         window.location.assign(url)
                     }
                 }
+                setCurrentDecision({} as DecisionType)
             })
         },
         [
@@ -231,46 +232,31 @@ export const usePlayerDecisions = ({
         ]
     )
 
+    const handleResuming = useCallback(() => {
+        if (isResumable.current) {
+            tooglePlay('play')
+            setPlayRate(1)
+        } else {
+            const { decisionAction } = currentDecision
+            setCurrentDecision({} as DecisionType)
+            if (decisionAction) {
+                const linkto = decisionAction.replace('nav|', '') ?? ''
+                window.location.assign(linkto)
+            } else {
+                window.location.assign(APP_PATH.ROOT)
+            }
+        }
+    }, [setCurrentDecision, currentDecision, isResumable.current])
+
     const resumePlay = useCallback(async () => {
         shunt.current = true
-        return new Promise<{
-            resume: boolean
-            decisionAction: string
-        }>((resolve) => {
+
+        return new Promise<void>((resolve) => {
             backSoundOut()
             setForDecision(false, '')
-            setCurrentDecision({} as DecisionType)
-            restorePlayerVolume(1)
-
-            resolve({
-                resume: isResumable.current,
-                decisionAction: currentDecision.decisionAction ?? '',
-            })
-        }).then(({ resume, decisionAction }) => {
-            if (resume) {
-                tooglePlay('play')
-                setPlayRate(1)
-            } else {
-                if (decisionAction) {
-                    const [action, url] = decisionAction.split('|')
-                    if (action === 'nav') {
-                        window.location.assign(url)
-                    }
-                } else {
-                    window.location.href = APP_PATH.ROOT
-                }
-            }
-        })
-    }, [
-        setForDecision,
-        backSoundOut,
-        restorePlayerVolume,
-        tooglePlay,
-        setCurrentDecision,
-        shunt,
-        player,
-        isResumable.current,
-    ])
+            resolve()
+        }).then(() => handleResuming())
+    }, [shunt, setForDecision, backSoundOut, handleResuming])
 
     useEffect(() => {
         if (stopForDecision || !shunt.current) {
@@ -358,6 +344,7 @@ export const usePlayerDecisions = ({
         currentID,
         currentDecision,
         resumePlay,
+        updateDecisionSelected: setCurrentDecision,
         isResumable,
     }
 }

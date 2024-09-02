@@ -48,6 +48,7 @@ export const VideoCanvas = ({
         currentID,
         currentDecision,
         resumePlay,
+        updateDecisionSelected,
         isResumable,
     } = usePlayerDecisions({
         videoRef,
@@ -99,6 +100,7 @@ export const VideoCanvas = ({
                     resumePlay={handleResumePlay}
                     decisions={decisions}
                     currentDecision={currentDecision}
+                    updateDecisionSelected={updateDecisionSelected}
                     decisionColor={decisionColor}
                     shapeMap={shapeMap}
                     pausedTime={currentDecision.duration - pausedTime}

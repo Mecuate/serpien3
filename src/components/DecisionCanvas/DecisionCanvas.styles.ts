@@ -56,12 +56,12 @@ export const ContentArea = styled('div', {
     gap: '$5',
     width: '80%',
     height: '100%',
-    lineBreak: 'anywhere',
+    lineBreak: 'normal',
     wordBreak: 'break-word',
     wordWrap: 'break-word',
     paddingHorizontal: '$5',
 
-    '& :nth-child(1)': {
+    '& > .title-target': {
         marginBottom: '$5',
     },
     '& :nth-child(2)#DescriptionSection': {
@@ -69,7 +69,7 @@ export const ContentArea = styled('div', {
     },
 })
 export const ActionSection = styled('div', {
-    position: 'absolute',
+    // position: 'absolute',
     bottom: 0,
     minHeight: '80px',
     width: '100%',
@@ -77,7 +77,7 @@ export const ActionSection = styled('div', {
     display: 'grid',
     alignContent: 'center',
     justifyContent: 'center',
-    alignItems: 'stretch',
+    alignItems: 'center',
     justifyItems: 'center',
     border: '1px solid transparent',
 })

@@ -11,7 +11,8 @@ import { MainShapes } from './MainShapes'
 import { MShapeMAP } from './dataCollections'
 import { DecisionType } from 'models/video'
 import { HexagonLoader } from 'components/HexagonLoader'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
+import { Button } from 'components/Button'
 
 export enum DESCOLOR {
     WHITE = 'white',
@@ -24,6 +25,7 @@ type DecisionCanvasProps = {
     pausedTime: number
     decisions: DecisionType[]
     currentDecision: DecisionType
+    updateDecisionSelected: (decision: DecisionType) => void
     resumePlay?: () => void
     decisionColor?: DESCOLOR
     shapeMap?: MShapeMAP
@@ -32,6 +34,7 @@ type DecisionCanvasProps = {
 export const DecisionCanvas = ({
     decisions,
     currentDecision,
+    updateDecisionSelected,
     pausedTime,
     decisionColor,
     resumePlay,
@@ -39,10 +42,16 @@ export const DecisionCanvas = ({
 }: DecisionCanvasProps) => {
     return (
         <DecisionContainer variant={decisionColor}>
-            <HexagonLoader action={resumePlay} color={decisionColor} num={pausedTime} />
+            <HexagonLoader
+                action={resumePlay}
+                showButton={!currentDecision.playAtEnd}
+                color={decisionColor}
+                num={pausedTime}
+            />
             <DecisionUI
                 decisions={decisions}
                 currentDecision={currentDecision}
+                updateDecisionSelected={updateDecisionSelected}
                 shapeMap={shapeMap}
             />
         </DecisionContainer>
@@ -52,13 +61,19 @@ export const DecisionCanvas = ({
 type DecisionUIProps = {
     decisions: DecisionType[]
     currentDecision: DecisionType
+    updateDecisionSelected: (decision: DecisionType) => void
     shapeMap: MShapeMAP
 }
 
-const DecisionUI = ({ decisions, currentDecision, shapeMap }: DecisionUIProps) => {
+const DecisionUI = ({
+    decisions,
+    currentDecision,
+    updateDecisionSelected,
+    shapeMap,
+}: DecisionUIProps) => {
     const [openedItem, setOpenedItem] = useState('')
     const [isUserOver, setIsUserOver] = useState(true)
-    const [previewedDecision, setPreviewedDecision] = useState(currentDecision)
+    const [previewedDecision, setPreviewDecision] = useState(currentDecision)
 
     const handleDecisionHover = (hov: boolean, id: string) => {
         setIsUserOver(hov)
@@ -66,12 +81,18 @@ const DecisionUI = ({ decisions, currentDecision, shapeMap }: DecisionUIProps) =
     const handleDecisionPreview = (decision: string) => {
         setOpenedItem(decision)
     }
+    const setPreviewedDecision = useCallback((decision: DecisionType) => {
+        updateDecisionSelected(decision)
+        setPreviewDecision(decision)
+    }, [])
 
     return (
         <>
             <ContentContainer>
                 <ContentArea>
-                    <Typography.Subtitle>{previewedDecision.decisionTitle}</Typography.Subtitle>
+                    <Typography.Subtitle className="title-target">
+                        {previewedDecision.decisionTitle}
+                    </Typography.Subtitle>
                     <Typography.HTML
                         id="DescriptionSection"
                         htmlData={previewedDecision.decisionContent}
@@ -80,7 +101,15 @@ const DecisionUI = ({ decisions, currentDecision, shapeMap }: DecisionUIProps) =
                         }}
                     />
                     <ActionSection id="ActionSection">
-                        {previewedDecision.decisionAction}
+                        <Button.RoundAction
+                            size="big"
+                            action={() => {
+                                const linkto =
+                                    previewedDecision.decisionAction?.replace('nav|', '') ?? ''
+                                window.location.assign(linkto)
+                            }}
+                            icon="play"
+                        />
                     </ActionSection>
                 </ContentArea>
             </ContentContainer>

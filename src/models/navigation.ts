@@ -5,11 +5,11 @@ export enum APP_PATH {
     ROOT = '/',
     MENU = '/menu',
     HOME = '/home/*',
-    LANDING = '/landing',
     VIDEO = '/video/:video_name',
     DECISION = '/decision/:id',
     INTERACTIVE = '/interactive/:id',
     INFORMATIVE = '/informative/:id',
+    E404 = '/404',
 }
 
 export type NavigationAppType = {

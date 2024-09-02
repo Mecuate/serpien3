@@ -1,7 +1,6 @@
 import { Button } from 'components/Button'
 import { Screen } from 'components/Screen'
 import { Typography } from 'components/Typography'
-import { Image } from 'components/Image'
 
 import { useTranslation } from 'hooks/useTranslations'
 import { APP_PATH } from 'models'
@@ -9,12 +8,12 @@ import { Link } from 'react-router-dom'
 import { useNavigation, DocuwebPaths } from 'hooks/useNavigation'
 import { imageRepository } from 'sources/imageRepository'
 
-export const LandingScreen = () => {
+export const NotFoundPage = () => {
     const { t } = useTranslation()
     const { goTo } = useNavigation()
 
     return (
-        <Screen pannel={APP_PATH.HOME}>
+        <Screen pannel={APP_PATH.E404}>
             <div
                 style={{
                     display: 'flex',
@@ -45,7 +44,7 @@ export const LandingScreen = () => {
                         gap: '48px',
                     }}
                 >
-                    <Typography.Boom>{t('landing:docuwebTitle')}</Typography.Boom>
+                    <Typography.Boom>{'Not Found'}</Typography.Boom>
                     <Typography.Regular>{t('landing:welcomeMessage')}</Typography.Regular>
                     <Link
                         to={goTo(DocuwebPaths.FILM_0)}
@@ -68,34 +67,6 @@ export const LandingScreen = () => {
                         paddingRight: '18px',
                     }}
                 >
-                    <span
-                        style={{
-                            minWidth: '120px',
-                            height: 'auto',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'flex-end',
-                            justifyContent: 'center',
-                        }}
-                    >
-                        <Typography.Big>{t('landing:sponsorTitleA')}</Typography.Big>
-                    </span>
-                    <span
-                        style={{
-                            display: 'flex',
-                            height: 'auto',
-                            width: '100%',
-                            flexDirection: 'row',
-                            justifyContent: 'space-between',
-                            alignSelf: 'center',
-                        }}
-                    >
-                        <Image src={'landing:landingPage.logoMecuate'} size={'M'} />
-                        <Image src={'landing:landingPage.logoReptilia'} size={'M'} />
-                        <Image src={'landing:landingPage.logoOlmec'} size={'M'} />
-                        <Image src={'landing:landingPage.logoCultura'} size={'M'} />
-                        <Image src={'landing:landingPage.logoProyectos'} size={'M'} />
-                    </span>
                     <span>
                         <Typography.Small>{'Mecuate Astrophytum 2024.'}</Typography.Small>
                     </span>

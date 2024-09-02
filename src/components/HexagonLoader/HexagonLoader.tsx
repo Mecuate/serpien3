@@ -36,12 +36,14 @@ const pS = [
 
 type HexagonLoaderProps = {
     action?: () => void
+    showButton: boolean
     color?: string
     num?: number
 }
 
 export const HexagonLoader = ({
-    action,
+    action = () => {},
+    showButton,
     color = colors.SURFACE[100],
     num = 8,
 }: HexagonLoaderProps) => {
@@ -112,7 +114,9 @@ export const HexagonLoader = ({
                 </SVG>
             </TextContainer>
             <ActionContainer>
-                {!!action ? <Button.RoundAction size="big" action={action} icon={'play'} /> : null}
+                {showButton ? (
+                    <Button.RoundAction size="big" action={action} icon={'play'} />
+                ) : null}
             </ActionContainer>
         </ZoneContainer>
     )
