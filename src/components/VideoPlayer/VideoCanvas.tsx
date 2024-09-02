@@ -105,7 +105,7 @@ export const VideoCanvas = ({
                 />
             </MaskTitle>
 
-            {!showMeta && (
+            {showMeta && (
                 <pre
                     style={{
                         position: 'absolute',
