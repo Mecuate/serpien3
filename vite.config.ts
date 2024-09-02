@@ -44,7 +44,7 @@ export default defineConfig({
             treeshake: 'smallest',
             input: {
                 main: path.resolve(__dirname, 'index.html'),
-                login: path.resolve(__dirname, 'login.html'),
+                // login: path.resolve(__dirname, 'login.html'),
             },
         },
         sourcemap: true,

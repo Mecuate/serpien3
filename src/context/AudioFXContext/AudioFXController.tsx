@@ -23,7 +23,7 @@ export const AudioFXContextProvider: FunctionComponent<PropsWithChildren> = ({
     return (
         <AudioFXContext.Provider value={SFX}>
             <audio ref={audioBackgroundRef} id="background_audio" loop autoPlay muted>
-                <source src="/fs1.mp3" type="audio/mpeg" />
+                <source src="https://kowoj.mecuate.org/oso/pub/vid/pepe/424.mp3" type="audio/mpeg" />
             </audio>
             {children}
         </AudioFXContext.Provider>

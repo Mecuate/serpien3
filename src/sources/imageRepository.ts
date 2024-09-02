@@ -2,22 +2,18 @@
 
 export const imageRepository = 
 {
-  "landing:landingPage.poster1": "http://localhost/_assets_server/images/cerro/cerro-panoramic-dron.jpg",
-  "landing:landingPage.poster": "http://127.0.0.1:3000/static/images/cerro/desert.jpg",
-  "landing:landingPage.logoMecuate": "/img/mecuate-logo.png",
-  "landing:landingPage.logoReptilia": "/img/reptilia-logo.png",
-  "landing:landingPage.logoOlmec": "/img/olmec-logo.png",
-  "landing:landingPage.logoCultura": "/img/cultura-logo.png",
-  "landing:landingPage.logoProyectos": "/img/sitema-creacion-logo.png",
-  "personnel:profile.pepe": "/_assets_server/images/personnel/pepe.jpg"
+  "landing:landingPage.poster": "https://kowoj.mecuate.org/oso/pub/img/caballo/landing.jpg",
+  "landing:landingPage.logoMecuate": "https://kowoj.mecuate.org/oso/pub/img/caballo/mecuate-logo.png",
+  "landing:landingPage.logoReptilia": "https://kowoj.mecuate.org/oso/pub/img/caballo/reptilia-logo.png",
+  "landing:landingPage.logoOlmec": "https://kowoj.mecuate.org/oso/pub/img/caballo/olmec-logo.png",
+  "landing:landingPage.logoCultura": "https://kowoj.mecuate.org/oso/pub/img/caballo/cultura-logo.png",
+  "landing:landingPage.logoProyectos": "https://kowoj.mecuate.org/oso/pub/img/caballo/sitema-creacion-logo.png"
 }
 
 export type iKeyNames = 
-  'landing:landingPage.poster1'
-| 'landing:landingPage.poster'
+  'landing:landingPage.poster'
 | 'landing:landingPage.logoMecuate'
 | 'landing:landingPage.logoReptilia'
 | 'landing:landingPage.logoOlmec'
 | 'landing:landingPage.logoCultura'
 | 'landing:landingPage.logoProyectos'
-| 'personnel:profile.pepe'

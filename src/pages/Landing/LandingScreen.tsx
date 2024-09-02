@@ -7,6 +7,7 @@ import { useTranslation } from 'hooks/useTranslations'
 import { APP_PATH } from 'models'
 import { Link } from 'react-router-dom'
 import { useNavigation, DocuwebPaths } from 'hooks/useNavigation'
+import { imageRepository } from 'sources/imageRepository'
 
 export const LandingScreen = () => {
     const { t } = useTranslation()
@@ -24,7 +25,7 @@ export const LandingScreen = () => {
                     height: '100%',
                     width: '100%',
                     color: 'blueviolet',
-                    backgroundImage: `url('/img/landing.jpg')`,
+                    backgroundImage: `url(${imageRepository['landing:landingPage.poster']})`,
                     backgroundSize: 'cover',
                     overflow: 'hidden',
                     paddingLeft: '1rem',
