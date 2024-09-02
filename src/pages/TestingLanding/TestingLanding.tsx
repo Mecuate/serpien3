@@ -13,7 +13,7 @@ export const TestingLanding = () => {
     const myColors = Object.keys(colors)
 
     return (
-        <Screen pannel={APP_PATH.LANDING}>
+        <Screen pannel={APP_PATH.HOME}>
             <div
                 style={{
                     display: 'flex',
