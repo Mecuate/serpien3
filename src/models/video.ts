@@ -9,6 +9,7 @@ export type DecisionType = {
     start: number
     end: number
     slow: boolean
+    playAtEnd?: boolean
     duration: number
     decisionType: DTT
     decisionTitle?: string
@@ -18,22 +19,20 @@ export type DecisionType = {
 }
 
 export type VideoDataType = {
-    root: {
-        src: string
-        poster: string
-        id: string
-        shapeMap: MShapeMAP
-        decisionColor: DESCOLOR
-        autoplay: boolean
-        muted: boolean
-        keepAsPlayback: boolean
-        decisions: DecisionType[]
-    }
-    next: {
-        [key: number]: {
-            src: string
-            poster: string
-            id: string
-        }
-    }
+    src: string
+    poster: string
+    id: string
+    shapeMap: MShapeMAP
+    decisionColor: DESCOLOR
+    autoplay: boolean
+    muted: boolean
+    keepAsPlayback: boolean
+    decisions: DecisionType[]
 }
+// next: {
+//     [key: number]: {
+//         src: string
+//         poster: string
+//         id: string
+//     }
+// }

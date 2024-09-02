@@ -1,46 +1,35 @@
-import { sideBoxA } from 'components/VideoPlayer/VideoPlayer.styles'
 import { useNetwork } from 'context/NetworkContext'
 import { videoMockData } from 'fixtures/videoData'
-import { useState } from 'react'
+import { VideoDataType } from 'models/video'
+import { useEffect, useState } from 'react'
 
-export const useGetVideoConfiguration = (userLocation?: string) => {
+
+export const useGetVideoConfiguration = (userLocation: string) => {
     const { nodesAPI } = useNetwork()
-    const [isLoading, setIsLoading] = useState(false)
-
+    const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(!Boolean(userLocation))
+    const [videoData, setVideoData] = useState<VideoDataType>(videoMockData)
 
-    const req = nodesAPI.getNode({ name: userLocation?.replace('.mp4', '.json') ?? 'inicio.json' })
-    console.log(req)
+    useEffect(() => {
+        nodesAPI
+            .getNode({ name: userLocation.replace('.mp4', '.json') ?? 'inicio.json' })
+            .then((res: any) => {
+                setVideoData(res.root)
+                setIsLoading(false)
+                setIsError(false)
+            })
+            .catch((e: Error) => {
+                console.log(e)
+                setIsLoading(false)
+                setIsError(false)
+            })
 
-    if (!userLocation) {
-        setIsError(true)
-    }
-    const {
-        // src,
-        poster,
-        id: ident,
-        shapeMap,
-        decisionColor,
-        autoplay,
-        muted,
-        keepAsPlayback,
-        decisions,
-    } = videoMockData.root
-
-    const classStyle = sideBoxA
+        return () => {}
+    }, [userLocation])
 
     return {
-        src: 'http://localhost:6080/oso/pub/vid/04872bb3-fcab-44b6-9b54-d849184a8239/inicio.mp4',
         isLoading,
         isError,
-        poster,
-        shapeMap,
-        autoplay,
-        ident,
-        muted,
-        keepAsPlayback,
-        classStyle,
-        decisionColor,
-        decisions,
+        data: videoData,
     }
 }

@@ -41,6 +41,7 @@ export default defineConfig({
     build: {
         assetsDir: 'src/',
         rollupOptions: {
+            treeshake: 'smallest',
             input: {
                 main: path.resolve(__dirname, 'index.html'),
                 login: path.resolve(__dirname, 'login.html'),

@@ -1,31 +1,27 @@
-import { VideoContainer } from './VideoPlayer.styles'
+import { sideBoxA, VideoContainer } from './VideoPlayer.styles'
 import { useGetVideoConfiguration } from 'hooks/useGetVideoConfiguration'
 import { VideoCanvas } from './VideoCanvas'
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
 
 export const VideoPlayer = () => {
-    // const v1 = useRef<HTMLDivElement | null>(null)
-    // const v2 = useRef<HTMLDivElement | null>(null)
-    // const v3 = useRef<HTMLDivElement | null>(null)
-    let { video_name } = useParams();
-    const {
-        isLoading,
-        isError,
-        src,
-        poster,
-        shapeMap,
-        autoplay,
-        ident,
-        muted,
-        keepAsPlayback,
-        classStyle,
-        decisionColor,
-        decisions,
-    } = useGetVideoConfiguration(video_name)
+    let { video_name } = useParams()
+    const { isLoading, isError, data } = useGetVideoConfiguration(video_name ?? '')
 
     if (isLoading || isError) {
         return <div>Loading...</div>
     }
+
+    const {
+        src,
+        poster,
+        shapeMap,
+        autoplay,
+        id: ident,
+        muted,
+        keepAsPlayback,
+        decisionColor,
+        decisions,
+    } = data
 
     return (
         <VideoContainer data-vjs-player>
@@ -33,7 +29,7 @@ export const VideoPlayer = () => {
                 src={src}
                 ident={ident}
                 poster={poster}
-                classStyles={classStyle()}
+                classStyles={sideBoxA()}
                 decisions={decisions}
                 muted={muted}
                 autoplay={autoplay}

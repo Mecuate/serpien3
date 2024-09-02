@@ -1,6 +1,6 @@
 import { useAudioFXContext } from 'context/AudioFXContext/AudioFXController'
 import { defineDesicions, getVal, isTimeForDesicion, smoothRef } from 'engine/video/utils'
-import { GenericObject } from 'models'
+import { APP_PATH, GenericObject } from 'models'
 import { DecisionType } from 'models/video'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
@@ -24,6 +24,7 @@ export const usePlayerDecisions = ({
     const { audioBackgroundRef } = useAudioFXContext()
     const activeDecisions = useMemo(() => defineDesicions(decisions), [decisions])
     const shunt = useRef(true)
+    const isResumable = useRef(false)
 
     const [timeLineVal, setTimeLineVal] = useState(videoRef.current?.currentTime ?? 0)
     const [playerVolume] = useState(videoRef.current?.volume ?? 1)
@@ -196,17 +197,69 @@ export const usePlayerDecisions = ({
             setCurrentDecision,
         ]
     )
+    const endDecisionEffect = useCallback(
+        async ({ duration, decisionAction }: DecisionType) => {
+            backSoundIn()
+
+            return new Promise<NodeJS.Timeout>((resolve) => {
+                const wait = setTimeout(() => {
+                    resolve(wait)
+                }, duration * 1000 - 100)
+            }).then((wait) => {
+                shunt.current = true
+                clearTimeout(wait)
+                backSoundOut()
+                setForDecision(false, '')
+                setCurrentDecision({} as DecisionType)
+                restorePlayerVolume(1)
+                if (decisionAction) {
+                    const [action, url] = decisionAction.split('|')
+                    if (action === 'nav') {
+                        window.location.assign(url)
+                    }
+                }
+            })
+        },
+        [
+            setForDecision,
+            backSoundIn,
+            backSoundOut,
+            slowDown,
+            restorePlayerVolume,
+            tooglePlay,
+            setCurrentDecision,
+        ]
+    )
 
     const resumePlay = useCallback(async () => {
         shunt.current = true
-
-        return new Promise(() => {
+        return new Promise<{
+            resume: boolean
+            decisionAction: string
+        }>((resolve) => {
             backSoundOut()
-            // restorePlayerVolume(1)
             setForDecision(false, '')
             setCurrentDecision({} as DecisionType)
-            tooglePlay('play')
-            player && player.volume(1)
+            restorePlayerVolume(1)
+
+            resolve({
+                resume: isResumable.current,
+                decisionAction: currentDecision.decisionAction ?? '',
+            })
+        }).then(({ resume, decisionAction }) => {
+            if (resume) {
+                tooglePlay('play')
+                setPlayRate(1)
+            } else {
+                if (decisionAction) {
+                    const [action, url] = decisionAction.split('|')
+                    if (action === 'nav') {
+                        window.location.assign(url)
+                    }
+                } else {
+                    window.location.href = APP_PATH.ROOT
+                }
+            }
         })
     }, [
         setForDecision,
@@ -216,6 +269,7 @@ export const usePlayerDecisions = ({
         setCurrentDecision,
         shunt,
         player,
+        isResumable.current,
     ])
 
     useEffect(() => {
@@ -236,7 +290,12 @@ export const usePlayerDecisions = ({
             setForDecision(true, currDesc.id)
 
             if (currDesc && currDesc.slow) {
+                isResumable.current = true
                 decisionEffect(currDesc)
+            }
+            if (currDesc && currDesc.playAtEnd) {
+                isResumable.current = false
+                endDecisionEffect(currDesc)
             }
         }
     }, [
@@ -249,6 +308,7 @@ export const usePlayerDecisions = ({
         backSoundOut,
         slowDown,
         restorePlayerVolume,
+        resumePlay,
     ])
 
     useEffect(() => {
@@ -298,5 +358,6 @@ export const usePlayerDecisions = ({
         currentID,
         currentDecision,
         resumePlay,
+        isResumable,
     }
 }

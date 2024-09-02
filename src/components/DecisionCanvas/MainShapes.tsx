@@ -84,7 +84,7 @@ export const MainShapes = ({
                     <path
                         id="locatorPositionVectorLine"
                         className={cssls_6()}
-                        d={`M${CX},${CY},${CX-80},${CY},-10,1,-50,1`}
+                        d={`M${CX},${CY},${CX - 80},${CY},-10,1,-50,1`}
                     />
                     <g id="shapeLocator">
                         <circle className={cssls_9()} cx={CX} cy={CY} r="9" />
@@ -135,7 +135,7 @@ const BakedShapes = ({
     }, [currentDecision])
 
     return useMemo(() => {
-        return decisions.map((desicion) => {
+        return decisions.map((desicion, i) => {
             const { position, decisionImg, id: evID } = desicion
             const { id, d } = mainShapes[activeMap[position]]
             const { origin } = locatorPositions.find(({ target }) => target === id) ?? {
@@ -143,7 +143,7 @@ const BakedShapes = ({
             }
             const active = !!thisDecision ? thisDecision.id === evID : opened === id
             return (
-                <Fragment key={`keyint-desc.shape.${id}`}>
+                <Fragment key={`key${i}-desc.shape.${id}`}>
                     <clipPath id={`${id}_clip`}>
                         <path d={d} />
                     </clipPath>

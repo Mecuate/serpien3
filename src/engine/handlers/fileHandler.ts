@@ -6,5 +6,5 @@ export const fileHandler: FileHandlerType = {
     getFilm: ({ name }) =>
         MediaRootURL.get(`/pub/vid/${API_INSTANCE}/${name}`, {}),
     getImage: ({ name }) =>
-        MediaRootURL.get(`/pub/vid/${API_INSTANCE}/${name}`, {}),
+        MediaRootURL.get(`/pub/img/${API_INSTANCE}/${name}`, {}),
 }

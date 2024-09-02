@@ -32,14 +32,12 @@ export const VideoCanvas = ({
     shapeMap = MShapeMAP.AARAT,
     decisions,
 }: VideoCanvasProps) => {
-    const [autoPlayable, setAutoPlayable] = useState(keepAsPlayback ? false : autoplay)
-
     const videoRef = useMemo(() => createRef<HTMLVideoElement>(), [])
     const { player, videoHasEnded, isPlaying, tooglePlay } = useVideoJS(videoRef, {
         controls: true,
         preload: 'auto',
         responsive: true,
-        autoplay: autoPlayable,
+        autoplay: keepAsPlayback ? false : autoplay,
     })
     const [showMeta, setShowMeta] = useState(false)
     const {
@@ -51,6 +49,7 @@ export const VideoCanvas = ({
         currentID,
         currentDecision,
         resumePlay,
+        isResumable,
     } = usePlayerDecisions({
         videoRef,
         player,
@@ -90,7 +89,7 @@ export const VideoCanvas = ({
                 className="video-js html5-video-player"
                 poster={poster}
                 muted={muted}
-                autoPlay={autoPlayable}
+                autoPlay={keepAsPlayback ? false : autoplay}
                 disablePictureInPicture
             >
                 <source src={src} type="video/mp4" />
@@ -106,9 +105,8 @@ export const VideoCanvas = ({
                     pausedTime={currentDecision.duration - pausedTime}
                 />
             </MaskTitle>
-            {stopForDecision && null}
 
-            {showMeta && (
+            {!showMeta && (
                 <pre
                     style={{
                         position: 'absolute',
@@ -116,7 +114,7 @@ export const VideoCanvas = ({
                         left: 0,
                         padding: '1rem',
                         color: '#ffffff90',
-                        zIndex: 1000,
+                        zIndex: 10000,
                     }}
                 >
                     {JSON.stringify(
@@ -129,6 +127,7 @@ export const VideoCanvas = ({
                             currentID,
                             currentDecision,
                             resumePlay,
+                            isResumable,
                         },
                         null,
                         2

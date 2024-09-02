@@ -22,13 +22,13 @@ export const useVideoJS = (
                 return
             }
             if (action === 'play') {
-                player.play()
                 setIsPlaying(true)
+                player.play()
                 return
             }
             if (isPlaying) {
-                player.pause()
                 setIsPlaying(false)
+                player.pause()
                 return
             }
             setIsPlaying(true)
