@@ -1,5 +1,4 @@
 import { Button } from 'components/Button'
-import { HexagonLoader } from 'components/HexagonLoader'
 import { Screen } from 'components/Screen'
 import { Typography } from 'components/Typography'
 

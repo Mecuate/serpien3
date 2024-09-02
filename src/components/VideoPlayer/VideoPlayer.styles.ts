@@ -1,6 +1,6 @@
 import { styled, css, globalCss } from 'stitches.conf'
 import { colors } from 'styles/colors'
-import { blurIn, videoControlsFadeOutSlow } from 'styles/keyframes'
+import { videoControlsFadeOutSlow } from 'styles/keyframes'
 import { VCIDs } from './utils'
 
 export const VideoContainer = styled('div', {

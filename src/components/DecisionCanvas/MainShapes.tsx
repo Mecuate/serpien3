@@ -134,7 +134,7 @@ const BakedShapes = ({
         }
     }, [currentDecision])
 
-    return useMemo(() => {
+    const Memoized = useMemo(() => {
         return decisions.map((desicion, i) => {
             const { position, decisionImg, id: evID } = desicion
             const { id, d } = mainShapes[activeMap[position]]
@@ -172,4 +172,5 @@ const BakedShapes = ({
             )
         })
     }, [opened])
+    return <>{Memoized}</>
 }

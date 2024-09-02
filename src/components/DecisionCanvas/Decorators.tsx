@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { rectangles, squares } from './dataCollections'
-import { cssls_5, cssls_4, cssls_2, cssls_3, cssls_8, sqrFilled } from './DecisionCanvas.styles'
+import { cssls_5, cssls_4, cssls_3, sqrFilled } from './DecisionCanvas.styles'
 
 export const Circlelis = () => {
     const cssls4 = cssls_4()

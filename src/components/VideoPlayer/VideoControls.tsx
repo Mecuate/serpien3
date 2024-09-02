@@ -9,7 +9,6 @@ import {
     VolumeTrack,
     VolumeTrackBack,
 } from './VideoPlayer.styles'
-import { drag, select } from 'd3'
 import { useVideoWidth } from './useVideoWidth'
 
 type FuncsTypesCallbacks = {
